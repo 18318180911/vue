@@ -4,7 +4,6 @@
       <!-- :class="{ 类名: 布尔值 }" -->
       <!-- 布尔值为true, 标签增加类名， 为flase的时候删除类名 -->
     <button :class="{ on: isOn, off: !isOn}" @click="fn">点开</button>
-    </div>
   </div>
 </template>
 

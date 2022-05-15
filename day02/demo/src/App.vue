@@ -48,6 +48,7 @@
 
     <form class="row align-items-center">
       <div class="col-3">
+        <!-- 添加功能：给表单v-model绑定vue变量收集用户输入内容 -->
         <input
           type="text"
           class="form-control"
@@ -64,7 +65,8 @@
           v-model.number="productPrice"
         />
       </div>
-
+      <!-- 添加功能：添加资产按钮 – 绑定点击事件 -->
+      <!-- .prevent阻止按钮提交表单刷新页 -->
       <div class="col-3">
         <button
           type="submit"
@@ -133,6 +135,7 @@ export default {
   },
   methods: {
     addProperty() {
+      // 判断用户内容是否符合规定
       if (!this.productName || !this.productPrice) {
         alert("资产名称和价格不能为空");
         return;
@@ -144,7 +147,9 @@ export default {
       } else {
         id = 100;
       }
+      // 添加数组到数组中
       this.list.push({
+        // 数组取最后一个元素
         id,
         name: this.productName,
         price: this.productPrice,
@@ -160,4 +165,8 @@ export default {
 </script>
 
 <style scoped>
+  /* 大于100价格, 动态设置red类 */
+.expensive {
+  color: red;
+}
 </style>
