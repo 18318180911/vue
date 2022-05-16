@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="list">
+      <div class="item">apple1</div>
       <ProdItem/>
       <ProdItem/>
       <ProdItem/>
@@ -24,6 +25,8 @@
 // }
 </script>
 
-<style>
-
+<style scoped>
+.item {
+    color: red;
+}
 </style>

@@ -12,8 +12,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .item {
     background-color: pink;
+    color: aqua;
 }
 </style>
