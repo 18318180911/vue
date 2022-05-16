@@ -9,7 +9,7 @@
 
 <script>
 // 局部注册的演示
-import Prodltem from "@/components/Prodltem.vue";
+import Prodltem from "@/day2/Prodltem.vue";
 
 export default {
   components: {

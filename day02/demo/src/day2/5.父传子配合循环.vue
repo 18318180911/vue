@@ -1,16 +1,13 @@
 <template>
   <div>
     <div class="list">
-      {{msg}}
-      <div class="item" @click="msg = 'hello word'">修改</div>
+      <div class="item">apple1</div>
       <Prodltem
-        v-for="(obj, index) in list"
-        :index="index"
+        v-for="obj in list"
         :key="obj.id"
         :title="obj.proname"
         :price="obj.proprice"
         :info="obj.info"
-        @kanjia="handleKanjia"
       />
     </div>
   </div>
@@ -18,12 +15,11 @@
 
 <script>
 // 局部注册的演示
-import Prodltem from "@/components/10.子传父的写法.vue";
+import Prodltem from "@/day2/Prodltem.vue";
 
 export default {
   data() {
     return {
-      msg: '你好',
       list: [
       {
         id: 1,
@@ -47,16 +43,8 @@ export default {
     }
   },
   components: {
-    Prodltem
+    Prodltem,
   },
-  methods: {
-    handleKanjia(index, price) {
-      // 如果原价大于要减的价格, 将价格减掉
-      if (this.list[index].proprice > price) {
-        this.list[index].proprice = (this.list[index].proprice - price).toFixed(2)
-      }
-    }
-  }
 };
 </script>
 
