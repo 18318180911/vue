@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import "../node_modules/bootstrap/dist/css/bootstrap.css"
-// import ProdItem from '@/components/Demo1.vue'
-// Vue.component('ProdItem', ProdItem);
+import ProdItem from '@/components/Demo1.vue'
+Vue.component('ProdItem', ProdItem);
 
 Vue.config.productionTip = false
 

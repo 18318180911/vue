@@ -15,13 +15,13 @@
 
 <script>
 // 局部注册的演示
-import ProdItem from '@/components/Demo1.vue';
+// import ProdItem from '@/components/Demo1.vue';
 
-export default {
-components: {
-    ProdItem
-  }
-}
+// export default {
+// components: {
+//     ProdItem
+//   }
+// }
 </script>
 
 <style>
