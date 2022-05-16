@@ -2,27 +2,20 @@
   <div>
     <div class="list">
       <div class="item">apple1</div>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
+      <Prodltem title="小龙虾" price="10" info="好好吃" />
     </div>
   </div>
 </template>
 
 <script>
 // 局部注册的演示
-// import ProdItem from '@/components/Demo1.vue';
+import Prodltem from '@/components/Prodltem.vue';
 
-// export default {
-// components: {
-//     ProdItem
-//   }
-// }
+export default {
+components: {
+    Prodltem
+  }
+}
 </script>
 
 <style scoped>
