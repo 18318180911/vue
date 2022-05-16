@@ -1,22 +1,22 @@
 <template>
   <div @click="handleClick">
-      <div class="item">
-          {{title}}
-          <div>只要{{price}}</div>
-          <div>{{info}}</div>
-      </div>
+    <div class="item">
+      {{ title }}
+      <div>只要{{ price }}</div>
+      <div>{{ info }}</div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-props: ['title', 'price', 'info'],
-methods: {
+  props: ["title", "price", "info"],
+  methods: {
     handleClick() {
-        console.log('买它')
-    }
-}
-}
+      console.log("买它");
+    },
+  },
+};
 </script>
 
 <style>

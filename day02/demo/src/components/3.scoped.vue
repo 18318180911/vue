@@ -2,14 +2,14 @@
   <div>
     <div class="list">
       <div class="item">apple1</div>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
-      <ProdItem/>
+      <ProdItem />
+      <ProdItem />
+      <ProdItem />
+      <ProdItem />
+      <ProdItem />
+      <ProdItem />
+      <ProdItem />
+      <ProdItem />
     </div>
   </div>
 </template>
@@ -27,6 +27,6 @@
 
 <style scoped>
 .item {
-    color: red;
+  color: red;
 }
 </style>
