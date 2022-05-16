@@ -84,6 +84,7 @@ export default {
   name: "App",
   data() {
     return {
+      // 初始化数据优先取得备份数据，没有再给默认值
       list:JSON.parse(localStorage.getItem('list')) || [],
       productName: "",
       productPrice: 0,
@@ -91,6 +92,7 @@ export default {
   },
   watch: {
     list(newVal) {
+      // 改变是备份数据
       console.log(localStorage.setItem('list', JSON.stringify(newVal)))
     }
   },
