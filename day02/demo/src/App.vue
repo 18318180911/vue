@@ -1,7 +1,7 @@
 <template>
   <section class="todoapp">
     <!-- 除了驼峰, 还可以使用-转换链接 -->
-    <TodoHeader></TodoHeader>
+    <TodoHeader @addTask="addTask"></TodoHeader>
     <TodoMain :list="list"></TodoMain>
     <TodoFooter></TodoFooter>
   </section>
@@ -26,6 +26,16 @@ export default {
         { id: 201, name: "睡觉", isDone: false },
         { id: 103, name: "打豆豆", isDone: true },
       ],
+    }
+  },
+  methods: {
+    addTask(task) {
+      this.list.push({
+        // 使用时间戳来做id
+        id: Date.now(),
+        name: task,
+        isDone: false
+      })
     }
   },
   components: {
