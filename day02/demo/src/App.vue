@@ -1,7 +1,7 @@
 <template>
   <section class="todoapp">
     <!-- 除了驼峰, 还可以使用-转换链接 -->
-    <TodoHeader @addTask="addTask"></TodoHeader>
+    <TodoHeader @addTask="addTask" :list="list"></TodoHeader>
     <TodoMain @delTask="delTask" :list="showList"></TodoMain>
     <TodoFooter @clearList="clearList" @changeType="changeType" :list="showList"></TodoFooter>
   </section>
@@ -49,12 +49,23 @@ export default {
         showList = this.list.filter(item=>!item.isDone)
       }
       return showList
+    },
+    isAllChecked: {
+      get() {
+        return this.list.length > 0 && this.list.every(item => item.isDone)
+      },
+      set(isChecked) {
+        this.list.forEach(element => {
+          this.list.isDone = isChecked
+        });
+      }
     }
   },
   methods: {
     addTask(task) {
       this.list.push({
         // 使用时间戳来做id
+        // id: Date.now(),
         id: Date.now(),
         name: task,
         isDone: false

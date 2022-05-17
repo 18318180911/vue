@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <h1>todos</h1>
-    <input id="toggle-all" class="toggle-all" type="checkbox" >
+    <input id="toggle-all" class="toggle-all" type="checkbox" v-model="isAllChecked">
     <label for="toggle-all"></label>
     <!--  输入框 – 键盘事件 – 回车按键 -->
     <input
@@ -16,6 +16,7 @@
 
 <script>
 export default {
+  props: ['list'],
   data() {
     return {
       task: ''
@@ -32,6 +33,18 @@ export default {
       // 每当回车通知父页面
       this.$emit('addTask', this.task)
       this.task = ''
+    }
+  },
+  computed: {
+    isAllChecked: {
+      get() {
+        return this.list.length > 0 && this.list.every(item => item.isDone)
+      },
+      set(isChecked) {
+        this.list.forEach(element => {
+          element.isDone = isChecked
+        })
+      }
     }
   }
 }
