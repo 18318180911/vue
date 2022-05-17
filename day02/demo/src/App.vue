@@ -2,8 +2,8 @@
   <section class="todoapp">
     <!-- 除了驼峰, 还可以使用-转换链接 -->
     <TodoHeader @addTask="addTask"></TodoHeader>
-    <TodoMain @delTask="delTask" :list="list"></TodoMain>
-    <TodoFooter :list="list"></TodoFooter>
+    <TodoMain @delTask="delTask" :list="showList"></TodoMain>
+    <TodoFooter @changeType="changeType" :list="showList"></TodoFooter>
   </section>
 </template>
 
@@ -21,11 +21,34 @@ export default {
   data() {
     return {
       // 准备数组
-      list: [
-        { id: 100, name: "吃饭", isDone: true },
-        { id: 201, name: "睡觉", isDone: false },
-        { id: 103, name: "打豆豆", isDone: true },
-      ],
+      // list: [
+      //   { id: 100, name: "吃饭", isDone: true },
+      //   { id: 201, name: "睡觉", isDone: false },
+      //   { id: 103, name: "打豆豆", isDone: true },
+      // ],
+      list: JSON.parse(localStorage.getItem('list')) || [],
+      type: 'all',
+    }
+  },
+  watch: {
+    list: {
+      deep: true,
+      handler(newVal) {
+        localStorage.setItem("list", JSON.stringify(newVal))
+      }
+    }
+  },
+  computed: {
+    showList() {
+      let showList = []
+      if (this.type === 'all') {
+        showList = this.list
+      } else if (this.type === 'yes'){
+        showList = this.list.filter(item=>item.isDone)
+      } else {
+        showList = this.list.filter(item=>!item.isDone)
+      }
+      return showList
     }
   },
   methods: {
@@ -40,6 +63,9 @@ export default {
     delTask(index) {
       // 根据传入的index删除数据
       this.list.splice(index, 1);
+    },
+    changeType(type) {
+      this.type = type
     }
   },
   components: {
