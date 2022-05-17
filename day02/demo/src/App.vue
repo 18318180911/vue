@@ -3,7 +3,7 @@
     <!-- 除了驼峰, 还可以使用-转换链接 -->
     <TodoHeader @addTask="addTask"></TodoHeader>
     <TodoMain @delTask="delTask" :list="list"></TodoMain>
-    <TodoFooter></TodoFooter>
+    <TodoFooter :list="list"></TodoFooter>
   </section>
 </template>
 
