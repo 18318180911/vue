@@ -3,7 +3,7 @@
     <!-- 除了驼峰, 还可以使用-转换链接 -->
     <TodoHeader @addTask="addTask"></TodoHeader>
     <TodoMain @delTask="delTask" :list="showList"></TodoMain>
-    <TodoFooter @changeType="changeType" :list="showList"></TodoFooter>
+    <TodoFooter @clearList="clearList" @changeType="changeType" :list="showList"></TodoFooter>
   </section>
 </template>
 
@@ -66,6 +66,10 @@ export default {
     },
     changeType(type) {
       this.type = type
+    },
+    clearList() {
+      // 点击清空已完成
+      this.list = this.list.filter(item => !item.isDone)
     }
   },
   components: {

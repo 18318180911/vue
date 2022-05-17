@@ -12,7 +12,7 @@
         <a :class="{selected:type==='yes'}" href="javascript:;" @click="type = 'yes'">已完成</a>
       </li>
     </ul>
-    <button class="clear-completed" >清除已完成</button>
+    <button class="clear-completed" @click="clearList">清除已完成</button>
   </footer>
 </template>
 <script>
@@ -26,6 +26,11 @@ export default {
   data() {
     return {
       type: 'all'
+    }
+  },
+  methods: {
+    clearList() {
+      this.$emit('clearList')
     }
   }
 }
