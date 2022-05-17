@@ -8,7 +8,7 @@
         <!-- v-mode绑定复选框选中状态 -->
         <input class="toggle" type="checkbox" v-model="item.isDone"/>
         <label>{{ item.name }}</label>
-        <button class="destroy"></button>
+        <button class="destroy" @click="delTask"></button>
       </div>
     </li>
   </ul>
@@ -17,6 +17,12 @@
 
 <script>
 export default {
-  props: ['list']
+  props: ['list'],
+  methods: {
+    // 通知父页面删除数据
+    delTask(index) {
+      this.$emit('delTask', index)
+    }
+  }
 };
 </script>

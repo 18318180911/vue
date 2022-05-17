@@ -2,7 +2,7 @@
   <section class="todoapp">
     <!-- 除了驼峰, 还可以使用-转换链接 -->
     <TodoHeader @addTask="addTask"></TodoHeader>
-    <TodoMain :list="list"></TodoMain>
+    <TodoMain @delTask="delTask" :list="list"></TodoMain>
     <TodoFooter></TodoFooter>
   </section>
 </template>
@@ -36,6 +36,10 @@ export default {
         name: task,
         isDone: false
       })
+    },
+    delTask(index) {
+      // 根据传入的index删除数据
+      this.list.splice(index, 1);
     }
   },
   components: {
