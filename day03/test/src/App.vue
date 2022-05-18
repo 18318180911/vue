@@ -17,8 +17,9 @@
             <tr v-for="item in list" :key="item.id">
               <th scope="row">{{item.id}}</th>
               <td>{{item.name}}</td>
-              <td>{{item.price}}</td>
-              <td>Thu Aug 12 2010 08:00:00 GMT+0800 (China Standard Time)</td>
+              <!-- 2.价格大于100显示红色 -->
+              <td :class="{color: item.price > 100}">{{item.price}}</td>
+              <td>{{item.time}}</td>
               <td>
                 <button type="button" class="btn btn-link">删除</button>
               </td>
@@ -91,4 +92,7 @@ export default {
 </script>
 
 <style scoped>
+.color{
+  color: red;
+}
 </style>
