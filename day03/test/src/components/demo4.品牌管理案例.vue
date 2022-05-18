@@ -14,23 +14,25 @@
           </thead>
           <tbody>
             <!-- 1.使用v-for遍历数组，渲染数据 -->
-            <tr v-for="item in list" :key="item.id">
+            <tr v-for="(item, index) in list" :key="item.id">
               <th scope="row">{{item.id}}</th>
               <td>{{item.name}}</td>
               <!-- 2.价格大于100显示红色 -->
               <td :class="{color: item.price > 100}">{{item.price}}</td>
-              <td>{{item.time}}</td>
+              <td>{{item.time  | dateFilter}}</td>
               <td>
-                <button type="button" class="btn btn-link">删除</button>
+                <!-- 给删除按钮绑定点击事件 -->
+                <button type="button" class="btn btn-link" @click="deleteProduct(index)">删除</button>
               </td>
             </tr>
             <tr class="bg-light">
               <th scope="row">统计</th>
-              <td colspan="2">总价：0</td>
-              <td colspan="2">均价：0</td>
+              <td colspan="2">总价：{{totalPrice}}</td>
+              <td colspan="2">均价：{{random}}</td>
             </tr>
           </tbody>
-          <tfoot style="display: none">
+          <!-- 8.控制空状态的显示 -->
+          <tfoot v-show="list.length === 0">
             <tr>
               <td class="text-center" colspan="5">暂无数据</td>
             </tr>
@@ -41,21 +43,24 @@
 
     <form class="row align-items-center">
       <div class="col-3">
-        <input type="text" class="form-control" placeholder="资产名称" />
+        <!-- 5.给表单v-model绑定vue变量收集用户输入内容 -->
+        <input type="text" class="form-control" placeholder="资产名称" v-model="productName"/>
       </div>
 
       <div class="col-3">
-        <input type="text" class="form-control" placeholder="价格" />
+        <input type="text" class="form-control" placeholder="价格" v-model.number="productPrice"/>
       </div>
 
       <div class="col-3">
-        <button type="submit" class="btn btn-primary">添加资产</button>
+        <!-- 4.添加资产按钮-绑定点击事件 -->
+        <button type="submit" class="btn btn-primary" @click.prevent="addProperty">添加资产</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: "App",
   data() {
@@ -86,8 +91,57 @@ export default {
           time: new Date("2020-12-12"),
         },
       ],
+      productName: '',
+      productPrice: 0,
     };
   },
+  // 利用计算属性，计算总价和平均价
+  computed:{
+    totalPrice() {
+      let total = 0;
+      this.list.forEach((item) => {
+        total += item.price;
+      });
+      return total;
+    },
+    random() {
+      return this.totalPrice / this.list.length
+    },
+  },
+  methods: {
+    addProperty() {
+      
+      // 7.判断用户内容是否符合规定
+      if (!this.productName || !this.productPrice) {
+        alert("资产名称和价格不能为空");
+        return;
+      };
+      let id;
+      // 11.判断，有id就加id+1，没有就是id = 100
+      if (this.list.length > 0) {
+        id = this.list[this,list.length - 1].id + 1;
+      } else {
+        id = 100;
+      }
+      // 6.添加数组到数组中
+      this.list.push({
+        id,
+        name: this.productName,
+        price: this.productPrice,
+        time: new Date(),
+      });
+    },
+    deleteProduct(index) {
+      // 9.通过index找到对应数据删除
+      this.list.splice(index, 1);
+    }
+  },
+  // 3.filters过滤器
+  filters: {
+    dateFilter(time) {
+      return moment(time).format('YYYY-MM-DD')
+    }
+  }
 };
 </script>
 
