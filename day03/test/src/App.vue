@@ -15,9 +15,16 @@
 
 <script>
 import ProdItem from '@/components/test3/ProdItem.vue'
+import {getCart} from '@/api/cart'
 export default {
     components: {
         ProdItem
+    },
+    created() {
+        getCart().then(res => {
+            console.log('获取成功');
+            console.log(res.data)
+        })
     }
 };
 </script>
