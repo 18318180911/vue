@@ -1,31 +1,25 @@
 <template>
   <div>
-      <!-- 动态组件 -->
-    <button @click="componentsName = 'UserInfo'">个人信息</button>
-    <button @click="componentsName = 'UserName'">账号登陆</button>
-    <!-- 组件缓存 -->
-    <keep-alive>
-        <component :is="componentsName"></component>
-    </keep-alive>
-    
+      <!-- 插槽的作用是占位 -->
+      <TopBar>
+          <button>新增员工</button>
+            <button>导入员工</button>
+      </TopBar>
+      <TopBar>
+          <button>报表</button>
+      </TopBar>
   </div>
 </template>
 
 <script>
-import UserInfo from "@/components/test4/UserInfo.vue";
-import UserName from "@/components/test4/UserName.vue";
+import TopBar from '@/components/test4/TopBar.vue'
 export default {
-  data() {
-    return {
-      componentsName: "UserInfo",
-    };
-  },
-  components: {
-    UserInfo,
-    UserName,
-  },
-};
+    components: {
+        TopBar
+    }
+}
 </script>
 
 <style>
+
 </style>
