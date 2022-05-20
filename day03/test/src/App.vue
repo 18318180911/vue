@@ -4,11 +4,7 @@
     <div class="header">购物车案例</div>
     <!-- 列表 -->
     <div class="list">
-        <prodItem
-        v-for="item in list"
-        :key="item.id"
-        :data="item"
-        />
+      <prodItem v-for="item in list" :key="item.id" :data="item" />
     </div>
     <!-- 底部 -->
     <div class="footer">
@@ -20,24 +16,24 @@
 </template>
 
 <script>
-import ProdItem from '@/components/test3/ProdItem.vue'
-import {getCart} from '@/api/cart'
+import ProdItem from "@/components/test3/ProdItem.vue";
+import { getCart } from "@/api/cart";
 export default {
-    data() {
-        return {
-            list: []
-        }
-    },
-    components: {
-        ProdItem
-    },
-    created() {
-        getCart().then(res => {
-            console.log('获取成功');
-            console.log(res.data);
-            this.list = res.data.list;
-        })
-    }
+  data() {
+    return {
+      list: [],
+    };
+  },
+  components: {
+    ProdItem,
+  },
+  created() {
+    getCart().then((res) => {
+      console.log("获取成功");
+      console.log(res.data);
+      this.list = res.data.list;
+    });
+  },
 };
 </script>
 
@@ -51,6 +47,9 @@ export default {
 
 <style lang="less" scoped>
 .header {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   line-height: 60px;
   text-align: center;
   background: #1d7bff;
@@ -58,14 +57,12 @@ export default {
   font-size: 18px;
 }
 .list {
-    padding-bottom: 100px;
+  height: 100vh;
+  overflow: auto;
 }
 .footer {
   background-color: #fff;
   width: 100%;
-  position: fixed;
-  left: 0;
-  bottom: 0;
   display: flex;
   align-items: center;
   padding: 10px 20px;
