@@ -2,11 +2,19 @@
   <div>
       <!-- 插槽的作用是占位 -->
       <TopBar>
-          <button>新增员工</button>
-            <button>导入员工</button>
+          <template #left>
+              666
+          </template>
+           <template v-slot: right>
+               <button>新增员工</button>
+               <button>导入员工</button>
+           </template>
       </TopBar>
       <TopBar>
-          <button>报表</button>
+          <template #left>
+             <button>报表</button>
+          </template>
+          
       </TopBar>
       <TopBar>
           <input type="text" placeholder="请输入内容">

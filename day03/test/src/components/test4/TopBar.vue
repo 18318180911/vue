@@ -1,9 +1,11 @@
 <template>
   <div class="topBar">
-      <div class="left"></div>
+      <div class="left">
+          <slot name="left" />
+      </div>
       <div class="right">
           <!-- 插槽占位标签 -->
-          <slot>
+          <slot name="right">
               <!-- 如果外面没有传入，默认显示的内容 -->
               页面
           </slot>
