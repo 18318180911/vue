@@ -7,9 +7,11 @@
         class="checkbox"
         type="checkbox"
         name=""
-        id=""
+        :id="data.id"
       />
-      <img :src="data.goods_img" alt="" />
+      <label :for="data.id">
+        <img :src="data.goods_img" alt="" />
+      </label>
       <div class="info">
         <div class="top">{{ data.goods_name }}</div>
         <div class="bottom">
