@@ -9,8 +9,8 @@
     <!-- 底部 -->
     <div class="footer">
       <input type="checkbox" v-model="isAll" name="" id="" />
-      <div class="total">合计¥1151.8</div>
-      <button>结算</button>
+      <div class="total">合计¥{{totalPrice}}</div>
+      <button>结算{{totalCount}}</button>
     </div>
   </div>
 </template>
@@ -34,6 +34,24 @@ export default {
                       element.goods_state = isChecked
                   });
               }
+          },
+          totalPrice() {
+              let res = 0;
+              this.list.forEach(element => {
+                  if(element.goods_state) {
+                      res += element.goods_count * element.goods_price
+                  }
+              });
+              return res
+          },
+          totalCount() {
+              let res = 0;
+              this.list.forEach(element => {
+                  if (element.goods_state) {
+                      res += element.goods_count
+                  }
+              });
+              return res
           }
       },
   components: {
