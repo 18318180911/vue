@@ -2,7 +2,11 @@
   <div class="topBar">
       <div class="left"></div>
       <div class="right">
-          <slot/>
+          <!-- 插槽占位标签 -->
+          <slot>
+              <!-- 如果外面没有传入，默认显示的内容 -->
+              页面
+          </slot>
       </div>
   </div>
 </template>
