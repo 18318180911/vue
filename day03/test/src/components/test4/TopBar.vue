@@ -1,7 +1,8 @@
 <template>
   <div class="topBar">
       <div class="left">
-          <slot name="left" />
+          <slot :row="monthList" name="left"/>
+              {{monthList.first}}工资报表
       </div>
       <div class="right">
           <!-- 插槽占位标签 -->
@@ -15,7 +16,14 @@
 
 <script>
 export default {
-
+data() {
+    return {
+        monthList: {
+            first: '一月',
+            second: '二月'
+        }
+    }
+}
 }
 </script>
 
