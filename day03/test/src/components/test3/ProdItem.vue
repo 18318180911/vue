@@ -1,32 +1,30 @@
 <template>
   <div>
       <!-- 列表 -->
-    <div class="list">
       <div class="item">
-        <input class="checkbox" type="checkbox" name="" id="" />
+        <input v-model="data.goods_state" class="checkbox" type="checkbox" name="" id="" />
         <img
-          src="https://pic2.zhimg.com/50/v2-73d09ee61be3a5fed23d8e85ec5b49b3_hd.jpg?source=1940ef5c"
+          :src="data.goods_img"
           alt=""
         />
         <div class="info">
-          <div class="top">小米手机10</div>
+          <div class="top">{{data.goods_name}}</div>
           <div class="bottom">
-            <div class="price">¥129</div>
+            <div class="price">¥{{data.goods_price}}</div>
             <div class="number">
               <button>-</button>
-              <input type="text" />
+              <input type="text" v-model="data.goods_count" />
               <button>+</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-
+  props: ['data']
 }
 </script>
 
@@ -49,14 +47,23 @@ export default {
     height: 140px;
     padding: 20px;
     justify-content: space-between;
+    .top {
+        // 限制显示三行名字
+        display: -webkit-box;
+        overflow: hidden;  
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
     .bottom {
       display: flex;
       justify-content: space-between;
     }
     .number {
       display: flex;
+     
       input {
         width: 30px;
+         text-align: center;
       }
       button {
         width: 20px;

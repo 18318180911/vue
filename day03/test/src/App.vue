@@ -3,7 +3,13 @@
     <!-- 头部 -->
     <div class="header">购物车案例</div>
     <!-- 列表 -->
-    <ProdItem/>
+    <div class="list">
+        <prodItem
+        v-for="item in list"
+        :key="item.id"
+        :data="item"
+        />
+    </div>
     <!-- 底部 -->
     <div class="footer">
       <input type="checkbox" name="" id="" />
@@ -17,13 +23,19 @@
 import ProdItem from '@/components/test3/ProdItem.vue'
 import {getCart} from '@/api/cart'
 export default {
+    data() {
+        return {
+            list: []
+        }
+    },
     components: {
         ProdItem
     },
     created() {
         getCart().then(res => {
             console.log('获取成功');
-            console.log(res.data)
+            console.log(res.data);
+            this.list = res.data.list;
         })
     }
 };
