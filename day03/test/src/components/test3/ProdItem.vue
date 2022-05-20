@@ -17,9 +17,9 @@
         <div class="bottom">
           <div class="price">¥{{ data.goods_price }}</div>
           <div class="number">
-            <button>-</button>
-            <input type="text" v-model="data.goods_count" />
-            <button>+</button>
+            <button @click="data.goods_count --">-</button>
+            <input type="number" v-model.number="data.goods_count" />
+            <button @click="data.goods_count ++">+</button>
           </div>
         </div>
       </div>
@@ -30,6 +30,13 @@
 <script>
 export default {
   props: ["data"],
+  watch: {
+    'data.goods_count': function(newVal) {
+      if(newVal < 1) {
+        this.data.goods_count = 1
+      }
+    }
+  }
 };
 </script>
 

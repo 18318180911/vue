@@ -8,7 +8,7 @@
     </div>
     <!-- 底部 -->
     <div class="footer">
-      <input type="checkbox" name="" id="" />
+      <input type="checkbox" v-model="isAll" name="" id="" />
       <div class="total">合计¥1151.8</div>
       <button>结算</button>
     </div>
@@ -24,6 +24,18 @@ export default {
       list: [],
     };
   },
+   computed: {
+          isAll: {
+              get() {
+                  return this.list.every(item => item.goods_state)
+              },
+              set(isChecked) {
+                  this.list.forEach(element => {
+                      element.goods_state = isChecked
+                  });
+              }
+          }
+      },
   components: {
     ProdItem,
   },
