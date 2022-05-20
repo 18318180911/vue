@@ -1,32 +1,39 @@
 <template>
   <div>
-      <button @click="toggleShow">切换</button>
-      <div v-if="isShow" class="box" ref="myBox"></div>
+      <h4>水果案例</h4>
+      <input type="text" v-model="furits" @keyup.enter="clickFruit">
+      <p>当前选中的是：{{furitName}}</p>
+      <ul>
+          <MyFruit v-for="(item, index) in list" :key="index" :data="item" @clickFruit="changCurrent"/>
+      </ul>
   </div>
 </template>
 
 <script>
+import MyFruit from '@/components/test1/myFurits.vue'
 export default {
+    components: {
+        MyFruit
+    },
     data() {
         return {
-            isShow: true
+            furits: '',
+            list:[],
+            furitName: '',
         }
     },
     methods: {
-        toggleShow() {
-            this.isShow = !this.isShow
-            this.$nextTick(() => {
-                console.log(this.$refs.myBox);
-            })
+        clickFruit() {
+            this.list.push(this.furits);
+            this.furits = '';
+        },
+        changCurrent(data) {
+            this.furitName = data
         }
     }
 }
 </script>
 
 <style>
-.box {
-  width: 300px;
-  height: 300px;
-  background: pink;
-}
+
 </style>

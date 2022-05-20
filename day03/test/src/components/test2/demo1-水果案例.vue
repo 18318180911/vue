@@ -21,6 +21,7 @@ export default {
   methods: {
     login() {
       this.list.push(this.fruits);
+      // 清空输入框
       this.fruits = '';
     }
   }
