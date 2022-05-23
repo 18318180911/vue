@@ -4,21 +4,13 @@
           <!-- 表格标题区域 -->
     <thead>
       <tr>
-        <th>#</th>
-        <th>商品名称</th>
-        <th>价格</th>
-        <th>标签</th>
-        <th>操作</th>
+        <slot name="header" />
       </tr>
     </thead>
     <!-- 表格主体区域 -->
     <tbody>
-      <tr >
-        <td>1</td>
-        <td>商品</td>
-        <td>998</td>
-        <td>xxx</td>
-        <td>xxx</td>
+      <tr v-for="(item, index) in data" :key="item.id">
+        <slot :index="index" :row="item" name="content" />
       </tr>
     </tbody> 
       </table>
@@ -27,7 +19,7 @@
 
 <script>
 export default {
-
+    props: ['data']
 }
 </script>
 
