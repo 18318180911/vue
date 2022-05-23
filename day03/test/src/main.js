@@ -34,7 +34,8 @@ const routes = [
   },
   {
     path: '/part/:id',
-    component: Part
+    component: Part,
+    name: 'partPage',
   },
   {
     path: '*',
