@@ -29,7 +29,8 @@ const routes = [
   },
   {
     path: '/my',
-    component: My
+    component: My,
+    name: 'MyPage'
   },
   {
     path: '/part/:id',
