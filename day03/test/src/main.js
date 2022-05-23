@@ -13,6 +13,9 @@ import Find from './components/test7/Find.vue'
 import My from './components/test7/My.vue'
 import Part from './components/test7/Part.vue'
 import Path404 from './components/test7/404.vue'
+import Ranking from '@/components/test7/second/Ranking.vue'
+import Recommend from '@/components/test7/second/Recommend.vue'
+import SongList from '@/components/test7/second/SongList.vue'
 Vue.config.productionTip = false
 const routes = [
   {
@@ -25,7 +28,25 @@ const routes = [
      // 1. path 路径 / 开头
     path: '/find',
     // 2. component 组件
-    component: Find
+    component: Find,
+    redirect: '/find/ranking',
+    children: [
+      // 依旧是 path 跟 component 的配对
+      // 不要加斜杠, 因为需要改上一层拼接在一起
+      // 如果加了, 就需要在根路径进行访问
+      {
+        path: 'ranking',
+        component: Ranking
+      },
+      {
+        path: 'recommend',
+        component: Recommend
+      },
+      {
+        path: 'songlist',
+        component: SongList
+      },
+    ]
   },
   {
     path: '/my',
