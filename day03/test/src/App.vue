@@ -46,6 +46,9 @@ export default {
     changeCom(name) {
       this.currentCom = name
     }
+  },
+  created() {
+    console.log(this.$router)
   }
 };
 </script>
