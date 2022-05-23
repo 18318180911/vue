@@ -1,18 +1,42 @@
 <template>
   <div class="my-tab-bar">
-  	<div class="tab-item" v-for="(item, index) in tabList" :key="index">
+    <div
+      class="tab-item"
+      v-for="(item, index) in tabList"
+      :key="index"
+      @click="currentIndex = index"
+      :class="{ current: index === currentIndex }"
+    >
       <!-- 图标 -->
       <span class="iconfont" :class="item.iconText"></span>
       <!-- 文字 -->
-      <span>{{item.text}}</span>
+      <span>{{ item.text }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['tabList']
-}
+  data() {
+    return {
+      currentIndex: 0,
+    };
+  },
+  props: {
+    tabList: {
+      type: Array,
+      // 自定义校验规则
+      validator(val) {
+        if (val.length >= 2 && val.length <= 5) {
+          return true;
+        } else {
+          console.log("数组数据在2-5之间");
+          return false;
+        }
+      },
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -33,7 +57,7 @@ export default {
     align-items: center;
   }
 }
-    
+
 .current {
   color: #1d7bff;
 }
