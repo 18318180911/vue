@@ -1,16 +1,21 @@
 <template>
   <div>
     <MyHeader bg="#99ccff" title="tabbat案例" />
-    <MyTabBar :tabList="tabList" />
+    <component :is="currentCom"/>
+    <MyTabBar @changeCom="changeCom" :tabList="tabList" />
   </div>
 </template>
 
 <script>
 import MyHeader from "@/components/test6/MyHeader.vue";
 import MyTabBar from "@/components/test6/MyTabBar.vue";
+import MyGoodsList from "@/components/views/MyGoodsList.vue";
+import MyGoodsSearch from "@/components/views/MyGoodsSearch.vue";
+import MyUserInfo from "@/components/views/MyUserInfo.vue";
 export default {
   data() {
     return {
+      currentCom :'MyGoodsList',
       tabList: [
         {
           iconText: "icon-shangpinliebiao",
@@ -33,7 +38,15 @@ export default {
   components: {
     MyHeader,
     MyTabBar,
+    MyGoodsList,
+    MyGoodsSearch,
+    MyUserInfo
   },
+  methods: {
+    changeCom(name) {
+      this.currentCom = name
+    }
+  }
 };
 </script>
 

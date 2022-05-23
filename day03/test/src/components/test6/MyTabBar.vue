@@ -4,7 +4,7 @@
       class="tab-item"
       v-for="(item, index) in tabList"
       :key="index"
-      @click="currentIndex = index"
+      @click="changeComponent(item, index)"
       :class="{ current: index === currentIndex }"
     >
       <!-- 图标 -->
@@ -36,6 +36,12 @@ export default {
       },
     },
   },
+  methods: {
+      changeComponent(item, index) {
+          this.currentIndex = index;
+          this.$emit('changeCom', item.componentName)
+      }
+  }
 };
 </script>
 
