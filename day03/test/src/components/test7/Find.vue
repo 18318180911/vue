@@ -34,4 +34,7 @@ export default {
 .myLink {
   margin: 0 10px;
 }
+.router-link-exact-active {
+  color: red;
+}
 </style>

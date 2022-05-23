@@ -4,6 +4,7 @@
       <router-link to="/find">发现音乐</router-link>
       <router-link to="/my?name=小明">我的音乐</router-link>
       <router-link to="/part/666">朋友</router-link>
+      <router-link to="/login">登录</router-link>
     </div>
     <div class="top">
       <router-view></router-view>
