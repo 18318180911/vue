@@ -2,8 +2,8 @@
   <div>
     <div class="footer_wrap">
       <router-link to="/find">发现音乐</router-link>
-      <router-link to="/my">我的音乐</router-link>
-      <router-link to="/part">朋友</router-link>
+      <router-link to="/my?name=小明">我的音乐</router-link>
+      <router-link to="/part/666">朋友</router-link>
     </div>
     <div class="top">
       <router-view></router-view>
