@@ -11,6 +11,7 @@ Vue.use(VueRouter)
 // 1 引入组件对象 2 指定对应路径
 import Find from './components/test7/Find.vue'
 import My from './components/test7/My.vue'
+import Part from './components/test7/Part.vue'
 Vue.config.productionTip = false
 const routes = [
   {
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/my',
     component: My
+  },
+  {
+    path: '/part',
+    component: Part
   }
 ]
 // 3.2 创建路由实例, 放入配置表
