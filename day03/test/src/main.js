@@ -12,10 +12,17 @@ Vue.use(VueRouter)
 import Find from './components/test7/Find.vue'
 import My from './components/test7/My.vue'
 import Part from './components/test7/Part.vue'
+import Path404 from './components/test7/404.vue'
 Vue.config.productionTip = false
 const routes = [
   {
-    // 1. path 路径 / 开头
+    // 默认
+    path: '/',
+    // 重定向哪个路径
+    redirect: '/find'
+  },
+  {   
+     // 1. path 路径 / 开头
     path: '/find',
     // 2. component 组件
     component: Find
@@ -27,13 +34,19 @@ const routes = [
   {
     path: '/part/:id',
     component: Part
-  }
+  },
+  {
+    path: '*',
+    component: Path404
+  },
 ]
 // 3.2 创建路由实例, 放入配置表
 const router = new VueRouter({
   // 这里可以有配置对象
   // 有个属性叫routes是路由配置表,指定 url=>组件的配对
-  routes
+  routes,
+  // 修改路由在地址为拼接模式，history减少一个#号，优点好看一些
+  mode: "history"
 })
 new Vue({
   router,
