@@ -81,7 +81,12 @@ router.beforeEach((to, from, next) => {
   console.log('到达');
   console.log(to);
   console.log(from);
-  next();
+  if(to.path === '/my' && isLogin === false) {
+    alert('请登录')
+    next(false)
+  } else{
+    next()
+  }
 })
 new Vue({
   router,
