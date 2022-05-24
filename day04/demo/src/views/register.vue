@@ -51,7 +51,9 @@ export default {
   },
   methods: {
       registerFn() {
-          register(this.user).then(res=> {
+          this.$refs.form.validate().then(() => {
+              console.log('校验通过');
+              register(this.user).then(res=> {
               console.log(res);
               if(res.data.message === '注册成功') {
                   this.$router.push({
@@ -61,6 +63,10 @@ export default {
                   this.$toast.fail(res.data.message)
               }
           })
+          }).catch(()=> {
+              console.log('校验失败')
+          })
+          
       }
   }
 };
