@@ -16,7 +16,7 @@
             placeholder="请输入手机号码"
             :rules="[{ required: true, message: '手机号码不能为空' }]"
           ></van-field>
-          <van-field placeholder="请输入昵称" :rules="[{ required: true, message: '昵称不能为空' }]"
+          <van-field v-model="user.nickname" placeholder="请输入昵称" :rules="[{ required: true, message: '昵称不能为空' }]"
           ></van-field>
           <van-field
             v-model="user.password"
@@ -30,7 +30,7 @@
         没有账号？
         <a href="#/login" class="">去登录</a>
       </p>
-      <van-button type="primary" icon="star-o" round block
+      <van-button type="primary" round block @click="registerFn"
         >注册</van-button
       >
     </div>
@@ -38,15 +38,31 @@
 </template>
 
 <script>
+import {register} from '@/api/user'
 export default {
   data() {
     return {
       user: {
-        username: "",
+        username: "12345634689",
         passowrd: "",
+        nickname: ""
       },
     };
   },
+  methods: {
+      registerFn() {
+          register(this.user).then(res=> {
+              console.log(res);
+              if(res.data.message === '注册成功') {
+                  this.$router.push({
+                      path: '/login'
+                  })
+              } else {
+                  this.$toast.fail(res.data.message)
+              }
+          })
+      }
+  }
 };
 </script>
 

@@ -9,3 +9,11 @@ export function login(data) {
         data
     })
 }
+// 注册接口函数
+export function register(data) {
+    return request({
+        url: '/register',
+        method:'post',
+        data
+    })
+}
