@@ -1,34 +1,51 @@
 <template>
   <div class="personal">
     <router-link to="/edit_profile">
-        <div class="profile">
-            <img  src="http://img1.imgtn.bdimg.com/it/u=3757784226,1202878475&fm=26&gp=0.jpg" alt />
-            <div class="profile-center">
-                <div class="name">
-                    <span class="iconfont iconxingbienan"></span>我就是我
-                </div>
-                <div class="time">2019-9-24</div>
-            </div>
-            <span class="iconfont iconjiantou1"></span>
+      <div class="profile">
+        <img
+          src="http://img1.imgtn.bdimg.com/it/u=3757784226,1202878475&fm=26&gp=0.jpg"
+          alt
+        />
+        <div class="profile-center">
+          <div class="name">
+            <span class="iconfont iconxingbienan"></span>我就是我
+          </div>
+          <div class="time">2019-9-24</div>
         </div>
+        <span class="iconfont iconjiantou1"></span>
+      </div>
     </router-link>
-</div>
+    <div class="content">
+        <van-cell title="我的关注" is-link value="关注的用户" />
+        <van-cell title="我的跟帖" is-link value="跟帖/回复" />
+        <van-cell title="我的收藏" is-link value="文章/视频" />
+        <van-cell title="设置" is-link />
+    </div>
+    <van-button color="#eb6112" block round>退出</van-button>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style lang="less" scoped>
-.personal{
-    width: 100vw;
-    height: 100vh;
+.van-cell{
     background-color: #eee;
+    border-bottom: 1px solid #ddd;
+    margin-top: 10px;
 }
-a{
-    color: #666;
+.van-button{
+    width: 90%;
+    margin: 20px auto;
+}
+.personal {
+  width: 100vw;
+  height: 100vh;
+  background-color: #eee;
+}
+a {
+  color: #666;
 }
 .profile {
   display: flex;
