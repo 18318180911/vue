@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import {login} from '@/api/user.js'
 export default {
     data() {
         return {
@@ -28,7 +29,9 @@ export default {
     },
     methods: {
         loginFn() {
-            console.log('登陆成功')
+            login(this.user).then(res=> {
+                console.log(res)
+            })
         }
     }
 };
