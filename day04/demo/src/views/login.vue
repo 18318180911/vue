@@ -4,11 +4,8 @@
       <div class="close"><span class="iconfont iconicon-test"></span></div>
       <div class="logo"><span class="iconfont iconnew"></span></div>
       <div class="inputs">
-        <input placeholder="请输入手机号" class="input" /><input
-          placeholder="密码"
-          class="input"
-          type="password"
-        />
+        <van-field required placeholder="请输入用户名"></van-field>
+        <van-field required placeholder="请输入密码"></van-field>
       </div>
       <p class="tips">
         没有账号？
@@ -23,7 +20,15 @@
 export default {};
 </script>
 
-<style lang="less" spcoed>
+<style lang="less" scoped>
+// 样式出头：表示使用了样式穿透，我们就可以直接设置组件内部的标签样式
+/deep/.van-field{
+    border-bottom: 1px solid green;
+    margin-bottom: 20px;
+    input{
+        color: green;
+    }
+}
 .container {
   padding: 20px;
 }
