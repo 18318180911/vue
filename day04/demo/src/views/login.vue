@@ -30,7 +30,16 @@ export default {
     methods: {
         loginFn() {
             login(this.user).then(res=> {
-                console.log(res)
+                console.log(res);
+                if(res.data.message === "登录成功"){
+                    localStorage.setItem("75-token", res.data.data.token);
+                    localStorage.setItem("75-userId", res.data.data.user.id);
+                    this.$router.push({
+                        path: "/index"
+                    })
+                } else {
+                    this.$toast.fail(res.data.message)
+                }
             })
         }
     }

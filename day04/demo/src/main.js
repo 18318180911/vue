@@ -8,7 +8,8 @@ Vue.config.productionTip = false
 import router from './router/index'
 
 // 全局注册vant组件
-import {Field,Button} from 'vant';
+import {Toast, Field,Button} from 'vant';
+Vue.use(Toast)
 Vue.use(Field)
 Vue.use(Button)
 new Vue({
