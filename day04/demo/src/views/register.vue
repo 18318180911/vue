@@ -13,8 +13,10 @@
           <van-field
             v-model="user.username"
             required
-            placeholder="请输入用户名"
-            :rules="[{ required: true, message: '用户名不能为空' }]"
+            placeholder="请输入手机号码"
+            :rules="[{ required: true, message: '手机号码不能为空' }]"
+          ></van-field>
+          <van-field placeholder="请输入昵称" :rules="[{ required: true, message: '昵称不能为空' }]"
           ></van-field>
           <van-field
             v-model="user.password"
@@ -26,17 +28,16 @@
       </div>
       <p class="tips">
         没有账号？
-        <a href="#/register" class="">去注册</a>
+        <a href="#/login" class="">去登录</a>
       </p>
-      <van-button type="danger" icon="star-o" round block @click="loginFn"
-        >登陆</van-button
+      <van-button type="primary" icon="star-o" round block
+        >注册</van-button
       >
     </div>
   </div>
 </template>
 
 <script>
-import { login } from "@/api/user.js";
 export default {
   data() {
     return {
@@ -46,43 +47,16 @@ export default {
       },
     };
   },
-  methods: {
-    loginFn() {
-      // vant组件库内置 校验，校验的结果可以通过validate方法获取到，
-      // 当验证通过则触发then函数，不通过则触发catch函数
-      // validate方法通过form表单调用的
-      this.$refs.form
-        .validate()
-        .then(() => {
-          console.log("验证成功");
-          login(this.user).then((res) => {
-            console.log(res);
-            if (res.data.message === "登录成功") {
-              localStorage.setItem("75-token", res.data.data.token);
-              localStorage.setItem("75-userId", res.data.data.user.id);
-              this.$router.push({
-                path: "/index",
-              });
-            } else {
-              this.$toast.fail(res.data.message);
-            }
-          });
-        })
-        .catch(() => {
-          console.log("验证失败");
-        });
-    },
-  },
 };
 </script>
 
 <style lang="less" scoped>
 // 样式出头：表示使用了样式穿透，我们就可以直接设置组件内部的标签样式
 /deep/.van-field {
-  border-bottom: 1px solid green;
+  border-bottom: 1px solid #ccc;
   margin-bottom: 20px;
   input {
-    color: green;
+    color: black;
   }
 }
 .container {

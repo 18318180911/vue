@@ -15,6 +15,11 @@ const routes = [
         path: "/login",
         // 按需引入:  表示当用户之间访问到login.vue
         component: ()=>import("../views/login.vue")
+    },
+    {
+        path: "/register",
+        // 按需引入:  表示当用户之间访问到login.vue
+        component: ()=>import("../views/register.vue")
     }
 ]
 // 4.配置路由对象
