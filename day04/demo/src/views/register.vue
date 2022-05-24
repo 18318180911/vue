@@ -14,7 +14,7 @@
             v-model="user.username"
             required
             placeholder="请输入手机号码"
-            :rules="[{ required: true, message: '手机号码不能为空' }]"
+            :rules="[{ required: true, pattern: /^1[3,4,5,6,7,8,9]\d{9}$/, message: '手机号码输入格式不正确' }]"
           ></van-field>
           <van-field v-model="user.nickname" placeholder="请输入昵称" :rules="[{ required: true, message: '昵称不能为空' }]"
           ></van-field>
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       user: {
-        username: "12345634689",
+        username: "18345634689",
         passowrd: "",
         nickname: ""
       },
