@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>hellow</h1>
+    <!-- 8.设置挂载点 -->
+    <router-view></router-view>
   </div>
 </template>
 

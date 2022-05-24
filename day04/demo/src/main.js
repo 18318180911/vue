@@ -4,7 +4,11 @@ import App from './App.vue'
 import './style/reset.less'
 
 Vue.config.productionTip = false
+// 6.引入封装的路由对象
+import router from './router/index'
 
 new Vue({
+  // 
+  router,
   render: h => h(App),
 }).$mount('#app')
