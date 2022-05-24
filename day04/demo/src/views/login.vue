@@ -4,20 +4,34 @@
       <div class="close"><span class="iconfont iconicon-test"></span></div>
       <div class="logo"><span class="iconfont iconnew"></span></div>
       <div class="inputs">
-        <van-field required placeholder="请输入用户名"></van-field>
-        <van-field required placeholder="请输入密码"></van-field>
+        <van-field v-model="user.username" required placeholder="请输入用户名"></van-field>
+        <van-field v-model="user.password" required placeholder="请输入密码"></van-field>
       </div>
       <p class="tips">
         没有账号？
         <a href="#/register" class="">去注册</a>
       </p>
-      <van-button type="danger" icon="star-o" round block>登陆按钮</van-button>
+      <van-button type="danger" icon="star-o" round block @click="loginFn">登陆按钮</van-button>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            user: {
+                username: '',
+                passowrd: ''
+            }
+        }
+    },
+    methods: {
+        loginFn() {
+            console.log('登陆成功')
+        }
+    }
+};
 </script>
 
 <style lang="less" scoped>
