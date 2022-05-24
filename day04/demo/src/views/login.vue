@@ -14,7 +14,7 @@
         没有账号？
         <a href="#/register" class="">去注册</a>
       </p>
-      <div class="button">登录按钮</div>
+      <van-button type="danger" icon="star-o" round block>登陆按钮</van-button>
     </div>
   </div>
 </template>

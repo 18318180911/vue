@@ -7,8 +7,11 @@ Vue.config.productionTip = false
 // 6.引入封装的路由对象
 import router from './router/index'
 
+// 全局注册vant组件
+import {Button} from 'vant';
+Vue.use(Button)
 new Vue({
-  // 
+  // 7.路由对象注入到vue实例中
   router,
   render: h => h(App),
 }).$mount('#app')
