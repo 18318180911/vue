@@ -21,7 +21,7 @@
         <van-cell title="我的收藏" is-link value="文章/视频" />
         <van-cell title="设置" is-link />
     </div>
-    <van-button color="#eb6112" block round>退出</van-button>
+    <van-button color="#eb6112" block round @click="logoutFn">退出</van-button>
   </div>
 </template>
 
@@ -40,6 +40,15 @@ export default {
       console.log(32,res);
       this.user = res.data.data
     })
+  },
+  methods: {
+    logoutFn() {
+      // 清除缓存数据
+      localStorage.removeItem("75-token");
+      localStorage.removeItem("75-userId");
+      // 当跳转页面时，无需传参数就使用该语法
+      this.$router.push('/login')
+    }
   }
 };
 </script>

@@ -31,5 +31,17 @@ const routes = [
 const router = new VueRouter({
     routes
 })
+// 个人中心必须登录后才能访问，所以时导航守卫功能来实现
+// 条件1：用户访问的是个人中心页面：to.path
+// 条件2：用户是否登录，token--->localstorage
+router.beforeEach((to, from, next) => {
+    let token = localStorage.getItem("75-token")
+    if(to.path == '/personal' && !token) {
+        next('/login')
+    } else {
+        next()
+    }
+})
+
 // 5.导出路由对象、
 export default router
