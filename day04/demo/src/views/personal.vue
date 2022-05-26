@@ -3,14 +3,14 @@
     <router-link to="/edit_profile">
       <div class="profile">
         <img
-          src="http://img1.imgtn.bdimg.com/it/u=3757784226,1202878475&fm=26&gp=0.jpg"
+          :src="user.head_img"
           alt
         />
         <div class="profile-center">
           <div class="name">
-            <span class="iconfont iconxingbienan"></span>我就是我
+            <span class="iconfont" :class="{ iconxingbienv: user.gender == 0, iconxingbienan: user.gender == 1}">{{user.nickname}}</span>
           </div>
-          <div class="time">2019-9-24</div>
+          <div class="time">{{user.create_date}}</div>
         </div>
         <span class="iconfont iconjiantou1"></span>
       </div>
@@ -26,7 +26,22 @@
 </template>
 
 <script>
-export default {};
+import {userInfo} from '@/api/user'
+export default {
+  data() {
+    return {
+      // 用于保存数据
+      user: {}
+    }
+  },
+  created() {
+    let id = localStorage.getItem("75-userId");
+    userInfo(id).then(res => {
+      console.log(32,res);
+      this.user = res.data.data
+    })
+  }
+};
 </script>
 
 <style lang="less" scoped>

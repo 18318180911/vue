@@ -17,3 +17,17 @@ export function register(data) {
         data
     })
 }
+// 获取用户信息
+// /user/:id：冒号id表示id是一个参数而不是路径名
+export function userInfo(id) {
+    return request({
+        // 路径不需要写冒号
+        url: "/user/"+id,
+        method: 'get',
+        // headers表示请求头信息，会把请求发送给后端
+        headers: {
+            // 利用headers头部信息把token传递给后端，用于身份验证
+            Authorization: localStorage.getItem("75-token")
+        }
+    })
+}
