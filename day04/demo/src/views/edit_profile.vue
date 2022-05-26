@@ -10,17 +10,30 @@
     <!-- 内容 -->
     <div class="content">
         <div class="head_img">
-            <img src="http://img1.imgtn.bdimg.com/it/u=3757784226,1202878475&fm=26&gp=0.jpg" alt="">
+            <img :src="user.head_img | joinPath" alt="">
         </div>
-        <van-cell title="昵称" is-link value="大家加油" />
+        <van-cell title="昵称" is-link :value="user.nickname" />
         <van-cell title="密码" is-link value="******" />
-        <van-cell title="性别" is-link value="女" />
+        <van-cell title="性别" is-link :value="1 ? '男' : '女'" />
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import {userInfo} from '@/api/user' 
+export default {
+    data() {
+        return {
+            user: {}
+        }
+    },
+    created() {
+        let id = localStorage.getItem('75-userId');
+        userInfo(id).then(res =>{
+            this.user = res.data.data;
+        })
+    }
+};
 </script>
 
 <style lang="less" scoped>
