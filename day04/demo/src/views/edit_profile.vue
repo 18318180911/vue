@@ -11,6 +11,7 @@
     <div class="content">
         <div class="head_img">
             <img :src="user.head_img | joinPath" alt="">
+            <van-uploader :after-read="afterRead" />
         </div>
         <van-cell title="昵称" is-link :value="user.nickname" />
         <van-cell title="密码" is-link value="******" />
@@ -32,6 +33,11 @@ export default {
         userInfo(id).then(res =>{
             this.user = res.data.data;
         })
+    },
+    methods: {
+        afterRead(file) {
+            console.log(file)
+        }
     }
 };
 </script>
@@ -48,8 +54,16 @@ export default {
         width: 80px;
         width: 80px;
         margin: 20px auto;
+        position: relative;
         img {
             width:100%;
+        }
+        .van-uploader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            // 透明度
+            opacity: 0;
         }
     }
     .van-cell {
