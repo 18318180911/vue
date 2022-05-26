@@ -8,14 +8,15 @@ Vue.config.productionTip = false
 import router from './router/index'
 
 // 全局注册vant组件
-import {Toast, Field,Button,Form,CellGroup,Cell } from 'vant';
+import {Toast, Field,Button,Form,CellGroup,Cell, NavBar, Icon } from 'vant';
 Vue.use(Toast)
 Vue.use(Field)
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(CellGroup)
 Vue.use(Cell)
-
+Vue.use(NavBar);
+Vue.use(Icon);
 // 封装全局过滤器，用于拼接图片路径
 // 过滤器只能用在v-bind和插值表达式中
 import axios from './utils/request'
