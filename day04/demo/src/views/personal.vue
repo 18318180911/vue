@@ -3,7 +3,7 @@
     <router-link to="/edit_profile">
       <div class="profile">
         <img
-          :src="user.head_img"
+          :src="user.head_img | joinPath"
           alt
         />
         <div class="profile-center">

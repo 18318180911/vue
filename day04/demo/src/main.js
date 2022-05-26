@@ -15,6 +15,15 @@ Vue.use(Button)
 Vue.use(Form)
 Vue.use(CellGroup)
 Vue.use(Cell)
+
+// 封装全局过滤器，用于拼接图片路径
+// 过滤器只能用在v-bind和插值表达式中
+import axios from './utils/request'
+Vue.filter('joinPath', (val) => {
+  // 判断val不存在的时候，不处理val
+  if(!val){return val}
+  return axios.defaults.baseURL + val
+})
 new Vue({
   // 7.路由对象注入到vue实例中
   router,
