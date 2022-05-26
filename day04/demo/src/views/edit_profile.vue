@@ -46,6 +46,10 @@ export default {
             // 把获取到的图片对象添加到formDta对象中
             formdata.append('file', file.file)
             upload(formdata).then(res => {
+                // 图片上传失败时，添加提示
+                if(res.data.message !== '文件上传成功') {
+                    return this.$toast.fail(res.data.message+ '图片格式不正确，只支持png和jpg格式!')
+                }
                 let url = res.data.data.url
                 // 在获取图片在线地址后，调用修改头像接口，实现功能
                 // 调用修改头像接口
