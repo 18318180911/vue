@@ -10,7 +10,7 @@
           <div class="name">
             <span class="iconfont" :class="{ iconxingbienv: user.gender == 0, iconxingbienan: user.gender == 1}">{{user.nickname}}</span>
           </div>
-          <div class="time">{{user.create_date}}</div>
+          <div class="time" v-formatDate="user.create_date"></div>
         </div>
         <span class="iconfont iconjiantou1"></span>
       </div>
