@@ -1,5 +1,8 @@
 <template>
-  <div>hellow</div>
+  <div>
+    <!-- 设置挂载点 -->
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
