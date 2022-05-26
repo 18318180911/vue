@@ -25,9 +25,9 @@ export function userInfo(id) {
         url: "/user/"+id,
         method: 'get',
         // headers表示请求头信息，会把请求发送给后端
-        headers: {
-            // 利用headers头部信息把token传递给后端，用于身份验证
-            Authorization: localStorage.getItem("75-token")
-        }
+        // headers: {
+        //     // 利用headers头部信息把token传递给后端，用于身份验证
+        //     Authorization: localStorage.getItem("75-token")
+        // }
     })
 }
