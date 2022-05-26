@@ -31,3 +31,19 @@ export function userInfo(id) {
         // }
     })
 }
+// 文件上传
+export function upload(data){
+    return request({
+        url: '/upload',
+        method: 'post',
+        data
+    })
+}
+// 编辑用户信息
+export function user_update(id, data) {
+    return request({
+        url: '/user_update/'+id,
+        method: 'post',
+        data
+    })
+}

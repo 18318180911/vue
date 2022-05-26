@@ -21,22 +21,45 @@
 </template>
 
 <script>
-import {userInfo} from '@/api/user' 
+import {userInfo, upload, user_update} from '@/api/user' 
 export default {
     data() {
         return {
-            user: {}
+            user: {},
+            // 声明id
+            id: null
         }
     },
     created() {
-        let id = localStorage.getItem('75-userId');
-        userInfo(id).then(res =>{
+        // 在created中把id保存起来
+        this.id = localStorage.getItem('75-userId');
+        userInfo(this.id).then(res =>{
             this.user = res.data.data;
         })
     },
     methods: {
         afterRead(file) {
-            console.log(file)
+            // 可以把自行将文件上传到服务器
+            console.log(file);
+            // 上传文件必须使用formData数据格式
+            let formdata = new FormData()
+            // 把获取到的图片对象添加到formDta对象中
+            formdata.append('file', file.file)
+            upload(formdata).then(res => {
+                let url = res.data.data.url
+                // 在获取图片在线地址后，调用修改头像接口，实现功能
+                // 调用修改头像接口
+                user_update(this.id, {
+                    head_img: url
+                }).then(res => {
+                    // 判断修改成功胡，自动更新浏览器上的头像
+                    if(res.data.message == '修改成功'){
+                        this.user.head_img = url
+                    }else{
+                        this.$toast.fail(res.data.message)
+                    }
+                })
+            })
         }
     }
 };
