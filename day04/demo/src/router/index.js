@@ -48,5 +48,15 @@ router.beforeEach((to, from, next) => {
     }
 })
 
+let writeArr = ['/personal', '/edit_profile']
+router.beforeEach((to, from, next) => {
+    let token = localStorage.getItem('75-token')
+    if(writeArr.indexOf(to.path) != -1 && !token){
+        next('/login')
+    } else {
+        next()
+    }
+})
+
 // 5.导出路由对象、
 export default router
