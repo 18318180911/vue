@@ -23,13 +23,15 @@
             />
         </van-dialog>
         <van-cell title="密码" is-link value="******" @click="showPasswordDialogFn" />
-        <van-dialog v-model="showPassword" title="修改密码" show-cancel-button>
+        <van-dialog v-model="showPassword" title="修改密码" show-cancel-button @confirm="passwordChangeFn">
             <van-field
+            v-model="oldPassword"
                 required
                 label="原密码"
                 placeholder="请输入原密码"
             />
              <van-field
+              v-model="newPassword"
                 required
                 label="新密码"
                 placeholder="请输入新密码"
@@ -50,7 +52,9 @@ export default {
             id: null,
             showNickname: false,
             nickname: '',
-            showPassword: false
+            showPassword: false,
+            oldPassword: '',
+            newPassword: ''
         }
     },
     created() {
@@ -114,7 +118,26 @@ export default {
         },
         showPasswordDialogFn() {
             this.showPassword = true
+        },
+        passwordChangeFn() {
+            if(this.oldPassword != this.user.password) {return this.$toast.fail('旧密码不能为空')}
+            if(this.oldPassword === this.newPassword) {return this.$toast.fail('新密码不能与旧密码一样')}
+            if(!this.newPassword) {return this.$toast.fail('新密码不能为空')}
+            user_update(this.id, {
+                password: this.newPassword
+            }).then(res => {
+                console.log(129,res)
+                if(res.data.message === '修改成功') {
+                    this.user.password = this.newPassword
+                    this.$toast.success(res.data.message)
+                    this.oldPassword = ''
+                    this.newPassword = ''
+                }else {
+                    this.$toast.fail(res.data.message)
+                }
+            })
         }
+        
     }
 };
 </script>
