@@ -16,7 +16,12 @@
             <template #right>
                 <van-icon name="manager-o"  size="20"  />
             </template>
-        </van-nav-bar>   
+        </van-nav-bar>
+        <van-tabs>
+            <van-tab v-for="index in 8" :title="'标签 ' + index" :key="index">
+                内容 {{ index }}
+            </van-tab>
+        </van-tabs> 
   </div>
 </template>
 
