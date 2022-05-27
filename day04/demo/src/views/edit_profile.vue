@@ -14,7 +14,7 @@
             <van-uploader :after-read="afterRead" />
         </div>
         <van-cell title="昵称" is-link :value="user.nickname" @click="showDialogFn" />
-        <van-dialog v-model="showNickname" title="编辑昵称" show-cancel-button @confirm="changeNicknameFn">
+        <van-dialog v-model="showNickname" title="编辑昵称" show-cancel-button :before-close="nicknameBeforeCloseFn" @confirm="changeNicknameFn">
             <van-field
                 v-model.trim="nickname"
                 required
@@ -91,6 +91,13 @@ export default {
                     this.$toast.fail(res.data.message)
                 }
             })
+        },
+        nicknameBeforeCloseFn(action, done) {
+            if(!this.nickname && action === 'confirm') {
+                done(false)
+            } else{
+                done()
+            }
         }
     }
 };
