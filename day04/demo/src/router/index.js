@@ -30,6 +30,11 @@ const routes = [
         path: "/edit_profile",
         // 按需引入:  表示当用户之间访问到login.vue
         component: ()=>import("../views/edit_profile.vue")
+    },
+    {
+        path: "/index",
+        // 按需引入:  表示当用户之间访问到login.vue
+        component: ()=>import("../views/index.vue")
     }
 ]
 // 4.配置路由对象
