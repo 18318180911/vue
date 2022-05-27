@@ -2,12 +2,12 @@
   <div class="personal">
     <router-link to="/edit_profile">
         <div class="profile">
-            <img  src="http://img1.imgtn.bdimg.com/it/u=3757784226,1202878475&fm=26&gp=0.jpg" alt />
+            <img :src="user.head_img | joinPath" alt />
             <div class="profile-center">
                 <div class="name">
-                    <span class="iconfont iconxingbienan"></span>我就是我
+                    <span class="iconfont iconxingbienan"></span>{{user.nickname}}
                 </div>
-                <div class="time">2019-9-24</div>
+                <div class="time" v-formatDate="user.create_date"></div>
             </div>
             <span class="iconfont iconjiantou1"></span>
         </div>
@@ -20,14 +20,37 @@
         <van-cell title="设置" is-link />
     </div>
    <van-button color="#eb6112" round block
-        >退出</van-button
+        @click="logoutFn">退出</van-button
       >
 </div>
 </template>
 
 <script>
+// 引入接口
+import {userInfo} from '@/api/user'
 export default {
-
+  // 保存数据
+  data() {
+    return {
+      user: {}
+    }
+  },
+ 
+  // 调用函数
+  created() {
+    let id = localStorage.getItem('75-userId');
+    userInfo(id).then(res => {
+      console.log(32, res);
+      this.user = res.data.data
+    })
+  },
+   methods: {
+    logoutFn() {
+      localStorage.removeItem('75-token');
+      localStorage.removeItem('75-userId');
+      this.$router.push('/login')
+    }
+  },
 }
 </script>
 

@@ -31,5 +31,14 @@ const router = new VueRouter({
     routes
 })
 
+router.beforeEach((to, from, next) => {
+    let token = localStorage.getItem('75-token')
+    if(to.psth == '/personal' && !token) {
+        next('/login')
+    } else {
+        next()
+    }
+})
+
 // 5.导出
 export default router

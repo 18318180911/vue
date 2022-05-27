@@ -17,3 +17,13 @@ export function register(data) {
         data
     })
 }
+// 获取用户信息
+export function userInfo(id) {
+    return request({
+        url: '/user/'+id,
+        method: 'get',
+        headers:{
+            Authorization: localStorage.getItem('75-token')
+        }
+    })
+}

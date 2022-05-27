@@ -13,7 +13,15 @@
             <img :src="user.head_img | joinPath" alt="">
             <van-uploader :after-read="afterRead" />
         </div>
-        <van-cell title="昵称" is-link :value="user.nickname" />
+        <van-cell title="昵称" is-link :value="user.nickname" @click="showDialogFn" />
+        <van-dialog v-model="showNickname" title="编辑昵称" show-cancel-button @confirm="changeNicknameFn">
+            <van-field
+                v-model.trim="nickname"
+                required
+                label="昵称"
+                placeholder="请输入昵称"
+            />
+        </van-dialog>
         <van-cell title="密码" is-link value="******" />
         <van-cell title="性别" is-link :value="1 ? '男' : '女'" />
     </div>
@@ -27,7 +35,9 @@ export default {
         return {
             user: {},
             // 声明id
-            id: null
+            id: null,
+            showNickname: false,
+            nickname: '',
         }
     },
     created() {
@@ -63,6 +73,23 @@ export default {
                         this.$toast.fail(res.data.message)
                     }
                 })
+            })
+        },
+        showDialogFn() {
+            this.showNickname = true;
+            this.nickname = this.user.nickname
+        },
+        changeNicknameFn() {
+            if(!this.nickname) {return this.$toast.fail('昵称不能为空')}
+            user_update(this.id, {
+                nickname: this.nickname
+            }).then(res=> {
+                if(res.data.message == '修改成功'){
+                    // 在浏览器中显示的昵称
+                    this.user.nickname = this.nickname
+                }else{
+                    this.$toast.fail(res.data.message)
+                }
             })
         }
     }
