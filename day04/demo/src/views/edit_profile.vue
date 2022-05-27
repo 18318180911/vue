@@ -22,7 +22,19 @@
                 placeholder="请输入昵称"
             />
         </van-dialog>
-        <van-cell title="密码" is-link value="******" />
+        <van-cell title="密码" is-link value="******" @click="showPasswordDialogFn" />
+        <van-dialog v-model="showPassword" title="修改密码" show-cancel-button>
+            <van-field
+                required
+                label="原密码"
+                placeholder="请输入原密码"
+            />
+             <van-field
+                required
+                label="新密码"
+                placeholder="请输入新密码"
+            />
+        </van-dialog>
         <van-cell title="性别" is-link :value="1 ? '男' : '女'" />
     </div>
   </div>
@@ -38,6 +50,7 @@ export default {
             id: null,
             showNickname: false,
             nickname: '',
+            showPassword: false
         }
     },
     created() {
@@ -98,6 +111,9 @@ export default {
             } else{
                 done()
             }
+        },
+        showPasswordDialogFn() {
+            this.showPassword = true
         }
     }
 };
