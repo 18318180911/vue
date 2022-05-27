@@ -1,10 +1,12 @@
 <template>
   <div>
     <!-- 头部 -->
-    <!-- left-arrow：左箭头 -->
-    <van-nav-bar title="个人信息编辑" left-arrow>
+    <!-- left-arrow：左箭头
+    $router.back()：返回一个路由地址
+     -->
+    <van-nav-bar title="个人信息编辑" left-arrow @click-left="$router.back()">
       <template #right>
-        <van-icon name="wap-home-o" size="20" />
+        <van-icon name="wap-home-o" size="20" @click="$router.push('/index')" />
       </template>
     </van-nav-bar>
     <!-- 内容 -->
