@@ -23,7 +23,7 @@
             />
         </van-dialog>
         <van-cell title="密码" is-link value="******" @click="showPasswordDialogFn" />
-        <van-dialog v-model="showPassword" title="修改密码" show-cancel-button @confirm="passwordChangeFn">
+        <van-dialog v-model="showPassword" title="修改密码" show-cancel-button :before-close="passwordBeforeCloseFn" @confirm="passwordChangeFn">
             <van-field
             v-model="oldPassword"
                 required
@@ -136,6 +136,17 @@ export default {
                     this.$toast.fail(res.data.message)
                 }
             })
+        },
+        passwordBeforeCloseFn(action, done) {
+            if(action === 'confirm') {
+                if(this.oldPassword != this.user.password || this.oldPassword === this.newPassword || !this.newPassword) {
+                    done(false)
+                } else{
+                    done()
+                }
+            } else {
+                done()
+            }
         }
         
     }
