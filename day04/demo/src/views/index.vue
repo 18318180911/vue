@@ -1,61 +1,91 @@
 <template>
   <div>
-        <!-- 头部 -->
-        <van-nav-bar title="标题" left-text="返回" left-arrow>
-            <template #left>
-                <span class="iconfont iconnew icon-left"></span>
-            </template>
-            <!-- 中 -->
-            <template #title>
-                <div class="search">
-                   <van-icon name="search" size="18" /> 
-                   <span>搜索商品</span>
-                </div>
-            </template>
-            <!--right  -->
-            <template #right>
-                <van-icon name="manager-o"  size="20"  />
-            </template>
-        </van-nav-bar>
-        <van-tabs>
-            <van-tab v-for="index in 8" :title="'标签 ' + index" :key="index">
-                内容 {{ index }}
-            </van-tab>
-        </van-tabs> 
+    <!-- 头部 -->
+    <van-nav-bar title="标题" left-text="返回" left-arrow>
+      <template #left>
+        <span class="iconfont iconnew icon-left"></span>
+      </template>
+      <!-- 中 -->
+      <template #title>
+        <div class="search">
+          <van-icon name="search" size="18" />
+          <span>搜索商品</span>
+        </div>
+      </template>
+      <!--right  -->
+      <template #right>
+        <van-icon name="manager-o" size="20" />
+      </template>
+    </van-nav-bar>
+    <van-tabs>
+      <van-tab v-for="item in categoryList" :title="item.name" :key="item.id">
+        <newsItem v-for="item in newsList" :key="item.id" :post="item"></newsItem>
+      </van-tab>
+    </van-tabs>
   </div>
 </template>
 
 <script>
+import newsItem from "../components/newsItem.vue";
+import { category, post_news } from "@/api/news.js";
 export default {
-
-}
+    components: {
+    newsItem,
+  },
+  data() {
+    return {
+      // 栏目列表
+      categoryList: [],
+      // 表示栏目下标值，1表示默认获取“头条”的下标
+      curIndex: 1,
+      // 新闻列表
+      newsList: [],
+    };
+  },
+  
+  created() {
+    category().then((res) => {
+      this.categoryList = res.data.data;
+      this.getNews();
+    });
+  },
+  methods: {
+      // 获取文章列表数据，封装在getNews函数中调用接口，是为了能够复用这个里面的代码。
+    getNews() {
+      post_news({
+        category: this.categoryList[this.curIndex].id,
+      }).then(res => {
+        this.newsList = res.data.data;
+      });
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
-/deep/.van-nav-bar{
-    background: red;
-    .iconnew{
-        font-size: 50px;
+/deep/.van-nav-bar {
+  background: red;
+  .iconnew {
+    font-size: 50px;
+    color: #fff;
+  }
+  .van-nav-bar__title {
+    width: 60%;
+    .search-box {
+      width: 100%;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.3);
+      span {
         color: #fff;
+      }
     }
-    .van-nav-bar__title{
-        width: 60%;
-        .search-box{
-            width: 100%;
-            height: 36px;
-            line-height: 36px;
-            text-align: center;
-            border-radius: 20px;
-            background: rgba(255,255,255, 0.3);
-            span{
-                color: #fff;
-            }
-        }
-    }
+  }
 
-
-    .van-icon{
-        color: #fff;
-    }
+  .van-icon {
+    color: #fff;
+  }
 }
 </style>
