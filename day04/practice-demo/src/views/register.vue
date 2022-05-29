@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       user: {
-        username: "12354566786",
+        username: "",
         password: "",
         nickname: "",
       },

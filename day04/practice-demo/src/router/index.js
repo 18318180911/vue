@@ -14,15 +14,24 @@ const routes = [
     },
     {
         path: '/login',
-        component: ()=>import('../views/login.vue')
+        component: ()=>import('@/views/login.vue')
     },
     {
         path: '/register',
-        component: ()=>import('../views/register.vue')
+        component: ()=>import('@/views/register.vue')
     },
     {
         path: '/personal',
-        component: ()=>import('../views/personal.vue')
+        component: ()=>import('@/views/personal.vue')
+    },
+    {
+        path: '/edit_profile',
+        component: ()=>import('@/views/edit_profile.vue')
+    },
+    {
+        path: "/index",
+        // 按需引入:  表示当用户之间访问到login.vue
+        component: ()=>import("@/views/index.vue")
     }
 ]
 

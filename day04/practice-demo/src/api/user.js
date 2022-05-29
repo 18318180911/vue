@@ -17,13 +17,29 @@ export function register(data) {
         data
     })
 }
-// 获取用户信息
+// 封装用户信息
 export function userInfo(id) {
     return request({
-        url: '/user/'+id,
+        url: '/user/' + id,
         method: 'get',
-        headers:{
-            Authorization: localStorage.getItem('75-token')
-        }
+        // headers: {
+        //     Authorization: localStorage.getItem('75-token')
+        // }
+    })
+}
+// 封装文件上传
+export function Uploader(data) {
+    return request({
+        url: '/upload',
+        method:'post',
+        data
+    })
+}
+// 封装编辑用户信息
+export function user_update(id, data) {
+    return request({
+        url: '/user_update/' + id,
+        method: 'post',
+        data
     })
 }

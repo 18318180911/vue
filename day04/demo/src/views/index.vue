@@ -17,6 +17,7 @@
         <van-icon name="manager-o" size="20" />
       </template>
     </van-nav-bar>
+    <!-- 内容 -->
     <van-tabs>
       <van-tab v-for="item in categoryList" :title="item.name" :key="item.id">
         <newsItem v-for="item in newsList" :key="item.id" :post="item"></newsItem>
