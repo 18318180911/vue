@@ -22,12 +22,20 @@
       <van-tab v-for="item in categoryList" :title="item.name" :key="item.id">
         <!-- 下拉 -->
         <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+           <van-list
+                    v-model="loading"
+                    :finished="finished"
+                    finished-text="我是有底线的~"
+                    @load="onLoad"
+                    :immediate-check="false"
+                    >
           <!-- 新闻列表 -->
           <newsItem
             v-for="item in newsList"
             :key="item.id"
             :post="item"
           ></newsItem>
+          </van-list>
         </van-pull-refresh>
       </van-tab>
     </van-tabs>
@@ -51,7 +59,9 @@ export default {
       newsList: [],
       isLoading: false,
       pageIndex:1,
-      pageSize: 8
+      pageSize: 8,
+      loading: false,
+            finished: false
     };
   },
 
@@ -77,7 +87,11 @@ export default {
     // 下拉更新
     onRefresh() {
       this.getNews()
-    }
+    },
+     // 上拉加载时触发的函数
+        onLoad(){
+            console.log(85,"上拉加载");
+        },
   },
 };
 </script>
