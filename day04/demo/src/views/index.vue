@@ -79,7 +79,7 @@ export default {
         pageIndex: this.pageIndex,
         pageSize: this.pageSize,
       }).then((res) => {
-        this.newsList = res.data.data;
+        // this.newsList = res.data.data;
         this.newsList = [...this.newsList, ...res.data.data];
         // 表示下拉刷新完成
         this.isLoading = false;
@@ -91,11 +91,15 @@ export default {
     },
     // 下拉更新
     onRefresh() {
+      this.pageIndex = 1;
+      this.newsList = [];
+      this.finished = false;
       this.getNews();
     },
     // 上拉加载时触发的函数
     onLoad() {
       console.log(85, "上拉加载");
+      if(this.newsList.length === 0) {return}
       // 更新请求页码数
       this.pageIndex++,
       // 调用接口获取下一页的数据
