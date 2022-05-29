@@ -15,11 +15,10 @@ export function post_news(params) {
         params
     })
 }
-
 // 文章详情
-export function articleDetail(id) {
+export function articleDetail(id){
     return request({
-        url: '/post/'+id,
-        method: 'get'
+        url: "/post/"+id,
+        method: "get"
     })
 }

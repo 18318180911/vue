@@ -47,3 +47,17 @@ export function user_update(id, data) {
         data
     })
 }
+
+// 关注用户
+export function user_follows(id) {
+    return request({
+        url: '/user_follows/' + id,
+    })
+}
+
+// 取消关注用户
+export function user_unfollow(id) {
+    return request({
+        url: '/user_unfollow/' + id,
+    })
+}

@@ -5,7 +5,9 @@
         <van-icon name="arrow-left back" @click="$router.back()" />
         <span class="iconfont iconnew new"></span>
       </div>
-      <span>关注</span>
+      <span @click="followFn">{{
+        article.has_follow ? "已关注" : "关注"
+      }}</span>
     </div>
     <div class="detail" v-if="article.id">
       <div class="title">{{ article.title }}</div>
@@ -13,9 +15,17 @@
         <span>{{ article.user.nickname }}</span> &nbsp;&nbsp;
         <span v-formatDate="article.create_date"></span>
       </div>
-      <div v-if="article.type==1" class="content" v-html="article.content"></div>
+      <div
+        v-if="article.type == 1"
+        class="content"
+        v-html="article.content"
+      ></div>
       <div v-else class="content videoContent">
-        <video :poster="article.cover[0].url" controls :src="article.content"></video>
+        <video
+          :poster="article.cover[0].url"
+          controls
+          :src="article.content"
+        ></video>
       </div>
       <div class="opt">
         <span class="like"> <van-icon name="good-job-o" />点赞 </span>
@@ -44,6 +54,7 @@
 
 <script>
 import { articleDetail } from "@/api/news";
+import { user_follows, user_unfollow } from "@/api/user";
 export default {
   data() {
     return {
@@ -59,6 +70,39 @@ export default {
       });
     }
   },
+  methods: {
+    // 关注/取消关注
+    followFn(){
+      // 判断当前的关注状态，未关注则调用“关注”接口
+      // 否则调用“取消关注”接口
+      // 文章详情接口，返回了一个has_follow的字段给我们判断
+      // 当前用户的关注状态，true表示已关注，false表示未关注
+      if(this.article.has_follow){
+        // 取消关注
+        user_unfollow(this.article.user.id).then(res=>{
+          console.log(96,res);
+          if(res.data.message == "取消关注成功"){
+            this.$toast.success(res.data.message)
+            // 更新has_follow的值
+            this.article.has_follow = !this.article.has_follow
+          }else{
+            this.$toast.fail(res.data.message)
+          }
+        })
+      }else{
+        // 进行关注
+        user_follows(this.article.user.id).then(res=>{
+          if(res.data.message == "关注成功"){
+            this.$toast.success(res.data.message)
+            // 更新has_follow的值
+            this.article.has_follow = !this.article.has_follow
+          }else{
+            this.$toast.fail(res.data.message)
+          }
+        })
+      }
+    }
+  }
 };
 </script>
 
@@ -124,7 +168,7 @@ export default {
   }
   .videoContent {
     text-indent: 0;
-    video{
+    video {
       width: 100%;
     }
   }
