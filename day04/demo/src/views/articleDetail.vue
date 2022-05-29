@@ -28,7 +28,7 @@
         ></video>
       </div>
       <div class="opt">
-        <span class="like" :class="{active: article.has_like}"> <van-icon name="good-job-o" />{{token ? article.like_length:'点赞 '}}</span>
+        <span class="like" :class="{active: article.has_like}" @click="likeFn"> <van-icon name="good-job-o" />{{token ? article.like_length:'点赞 '}}</span>
         <span class="chat"> <van-icon name="chat" class="w" />微信 </span>
       </div>
     </div>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { articleDetail } from "@/api/news";
+import { articleDetail, post_like } from "@/api/news";
 import { user_follows, user_unfollow } from "@/api/user";
 export default {
   data() {
@@ -102,6 +102,18 @@ export default {
           }
         })
       }
+    },
+    likeFn() {
+      post_like(this.article.id).then(res => {
+        console.log(94, res);
+        if(res.data.message == '点赞成功' || res.data.message == '取消成功') {
+          this.$toast.success(res.data.message)
+          this.article.has_like = !this.article.has_like
+          this.article.has_like?this.article.like_length++:this.article.like_length--
+        }else {
+          this.$toast.fail(res.data.message)
+        }
+      })
     }
   }
 };
