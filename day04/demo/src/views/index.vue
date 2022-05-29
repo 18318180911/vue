@@ -20,7 +20,15 @@
     <!-- 内容 -->
     <van-tabs>
       <van-tab v-for="item in categoryList" :title="item.name" :key="item.id">
-        <newsItem v-for="item in newsList" :key="item.id" :post="item"></newsItem>
+        <!-- 下拉 -->
+        <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+          <!-- 新闻列表 -->
+          <newsItem
+            v-for="item in newsList"
+            :key="item.id"
+            :post="item"
+          ></newsItem>
+        </van-pull-refresh>
       </van-tab>
     </van-tabs>
   </div>
@@ -30,7 +38,7 @@
 import newsItem from "../components/newsItem.vue";
 import { category, post_news } from "@/api/news.js";
 export default {
-    components: {
+  components: {
     newsItem,
   },
   data() {
@@ -41,9 +49,10 @@ export default {
       curIndex: 1,
       // 新闻列表
       newsList: [],
+      isLoading: false,
     };
   },
-  
+
   created() {
     category().then((res) => {
       this.categoryList = res.data.data;
@@ -51,14 +60,20 @@ export default {
     });
   },
   methods: {
-      // 获取文章列表数据，封装在getNews函数中调用接口，是为了能够复用这个里面的代码。
+    // 获取文章列表数据，封装在getNews函数中调用接口，是为了能够复用这个里面的代码。
     getNews() {
       post_news({
         category: this.categoryList[this.curIndex].id,
-      }).then(res => {
+      }).then((res) => {
         this.newsList = res.data.data;
+        // 表示下拉刷新完成
+        this.isLoading = false
       });
     },
+    // 下拉更新
+    onRefresh() {
+      this.getNews()
+    }
   },
 };
 </script>
