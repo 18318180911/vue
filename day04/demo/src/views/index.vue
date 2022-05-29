@@ -22,19 +22,19 @@
       <van-tab v-for="item in categoryList" :title="item.name" :key="item.id">
         <!-- 下拉 -->
         <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-           <van-list
-                    v-model="loading"
-                    :finished="finished"
-                    finished-text="我是有底线的~"
-                    @load="onLoad"
-                    :immediate-check="false"
-                    >
-          <!-- 新闻列表 -->
-          <newsItem
-            v-for="item in newsList"
-            :key="item.id"
-            :post="item"
-          ></newsItem>
+          <van-list
+            v-model="loading"
+            :finished="finished"
+            finished-text="我是有底线的~"
+            @load="onLoad"
+            :immediate-check="false"
+          >
+            <!-- 新闻列表 -->
+            <newsItem
+              v-for="item in newsList"
+              :key="item.id"
+              :post="item"
+            ></newsItem>
           </van-list>
         </van-pull-refresh>
       </van-tab>
@@ -58,10 +58,10 @@ export default {
       // 新闻列表
       newsList: [],
       isLoading: false,
-      pageIndex:1,
+      pageIndex: 1,
       pageSize: 8,
       loading: false,
-            finished: false
+      finished: false,
     };
   },
 
@@ -80,18 +80,27 @@ export default {
         pageSize: this.pageSize,
       }).then((res) => {
         this.newsList = res.data.data;
+        this.newsList = [...this.newsList, ...res.data.data];
         // 表示下拉刷新完成
-        this.isLoading = false
+        this.isLoading = false;
+        this.loading = false;
+        if (res.data.data.length < this.pageSize) {
+          this.finished = true;
+        }
       });
     },
     // 下拉更新
     onRefresh() {
-      this.getNews()
+      this.getNews();
     },
-     // 上拉加载时触发的函数
-        onLoad(){
-            console.log(85,"上拉加载");
-        },
+    // 上拉加载时触发的函数
+    onLoad() {
+      console.log(85, "上拉加载");
+      // 更新请求页码数
+      this.pageIndex++,
+      // 调用接口获取下一页的数据
+      this.getNews();
+    },
   },
 };
 </script>
