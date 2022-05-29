@@ -18,7 +18,8 @@
       </template>
     </van-nav-bar>
     <!-- 内容 -->
-    <van-tabs>
+    <!-- v-model="curIndex设置栏目选中效果" -->
+    <van-tabs v-model="curIndex" @change="tabChangeFn">
       <van-tab v-for="item in categoryList" :title="item.name" :key="item.id">
         <!-- 下拉 -->
         <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
@@ -91,20 +92,34 @@ export default {
     },
     // 下拉更新
     onRefresh() {
+      // 重置相关的变量
+      // 因为上拉加载的会改变pageIndex的值，所以为了重新获取第一页的数据，需要重置
       this.pageIndex = 1;
+      // 因为数组是累加在一起，因此导致报错，但其实我们刷新数据是不需要累加数据的，因此要重置
       this.newsList = [];
+      // 因为上拉加载有可能会导致finished设置会true，因为为了能够实现刷新页面后还能够继续实现上拉加载功能，因此需要重置
       this.finished = false;
       this.getNews();
     },
     // 上拉加载时触发的函数
     onLoad() {
       console.log(85, "上拉加载");
-      if(this.newsList.length === 0) {return}
+      // 当第一页的数据还没有请求回来的时候，阻止继续请求下一页的数据
+      if (this.newsList.length === 0) {
+        return;
+      }
       // 更新请求页码数
-      this.pageIndex++,
+      this.pageIndex++;
       // 调用接口获取下一页的数据
       this.getNews();
     },
+    // 点击栏目时触发的函数
+    tabChangeFn(name, title) {
+      // name：指的是栏目对应的下标值
+      // title：指的是栏目对应的标题
+      // 实现更新数据
+      this.onRefresh()
+    }
   },
 };
 </script>
