@@ -5,7 +5,7 @@
         <van-icon name="arrow-left back" @click="$router.back()" />
         <span class="iconfont iconnew new"></span>
       </div>
-      <span @click="followFn">{{
+      <span @click="followFn" :class="{active: article.has_follow}">{{
         article.has_follow ? "已关注" : "关注"
       }}</span>
     </div>
@@ -138,6 +138,11 @@ export default {
     text-align: center;
     border-radius: 15px;
     font-size: 13px;
+  }
+  >.active {
+    background: #fff;
+    border: 1px solid #000;
+    color: #000;
   }
 }
 .detail {
