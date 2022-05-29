@@ -50,6 +50,8 @@ export default {
       // 新闻列表
       newsList: [],
       isLoading: false,
+      pageIndex:1,
+      pageSize: 8
     };
   },
 
@@ -64,6 +66,8 @@ export default {
     getNews() {
       post_news({
         category: this.categoryList[this.curIndex].id,
+        pageIndex: this.pageIndex,
+        pageSize: this.pageSize,
       }).then((res) => {
         this.newsList = res.data.data;
         // 表示下拉刷新完成
