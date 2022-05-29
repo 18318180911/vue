@@ -28,7 +28,7 @@
         ></video>
       </div>
       <div class="opt">
-        <span class="like"> <van-icon name="good-job-o" />点赞 </span>
+        <span class="like" :class="{active: article.has_like}"> <van-icon name="good-job-o" />{{token ? article.like_length:'点赞 '}}</span>
         <span class="chat"> <van-icon name="chat" class="w" />微信 </span>
       </div>
     </div>
@@ -59,6 +59,7 @@ export default {
   data() {
     return {
       article: {},
+      token: localStorage.getItem('75-token')
     };
   },
   created() {
@@ -193,6 +194,9 @@ export default {
   }
   .w {
     color: rgb(84, 163, 5);
+  }
+  .active{
+    color: red;
   }
 }
 .keeps {
