@@ -1,103 +1,65 @@
 <template>
   <div class="articaldetail">
     <div class="header">
-        <div class="left">
-            <van-icon name="arrow-left back"
-                      @click="$router.back()" />
-            <span class="iconfont iconnew new"></span>
-        </div>
-        <span>关注</span>
+      <div class="left">
+        <van-icon name="arrow-left back" @click="$router.back()" />
+        <span class="iconfont iconnew new"></span>
+      </div>
+      <span>关注</span>
     </div>
     <div class="detail" v-if="article.id">
-        <div class="title">{{article.title}}</div>
-        <div class="desc">
-            <span>{{article.user.nickname}}</span> &nbsp;&nbsp;
-            <span v-formatDate="article.create_date"></span>
-        </div>
-        <div class="content" v-html="article.content">
-            文章的内容：
-            <ul>
-              <li>0001</li>
-              <li>0002</li>
-              <li>0003</li>
-              <li>0004</li>
-              <li>0005</li>
-              <li>0006</li>
-              <li>0007</li>
-              <li>0008</li>
-              <li>0009</li>
-              <li>0010</li>
-              <li>0011</li>
-              <li>0012</li>
-              <li>0013</li>
-              <li>0014</li>
-              <li>0015</li>
-              <li>0016</li>
-              <li>0017</li>
-              <li>0018</li>
-              <li>0019</li>
-              <li>0020</li>
-              <li>0021</li>
-              <li>0022</li>
-              <li>0023</li>
-              <li>0024</li>
-              <li>0025</li>
-              <li>0026</li>
-              <li>0027</li>
-              <li>0028</li>
-              <li>0029</li>
-              <li>0030</li>
-            </ul>
-        </div>
-        <div class="opt">
-            <span class="like">
-                <van-icon name="good-job-o" />点赞
-            </span>
-            <span class="chat">
-                <van-icon name="chat"
-                          class="w" />微信
-            </span>
-        </div>
+      <div class="title">{{ article.title }}</div>
+      <div class="desc">
+        <span>{{ article.user.nickname }}</span> &nbsp;&nbsp;
+        <span v-formatDate="article.create_date"></span>
+      </div>
+      <div v-if="article.type==1" class="content" v-html="article.content"></div>
+      <div v-else class="content videoContent">
+        <video :poster="article.cover[0].url" controls :src="article.content"></video>
+      </div>
+      <div class="opt">
+        <span class="like"> <van-icon name="good-job-o" />点赞 </span>
+        <span class="chat"> <van-icon name="chat" class="w" />微信 </span>
+      </div>
     </div>
     <!-- 精彩跟帖 -->
     <div class="keeps">
-        <h2>精彩跟帖</h2>
-        <div class="item">
-            <div class="head">
-                <img src="../assets/01.jpg"
-                     alt />
-                <div>
-                    <p>火星网友</p>
-                    <span>2小时前</span>
-                </div>
-                <span>回复</span>
-            </div>
-            <div class="text">文章说得很有道理</div>
+      <h2>精彩跟帖</h2>
+      <div class="item">
+        <div class="head">
+          <img src="../assets/01.jpg" alt />
+          <div>
+            <p>火星网友</p>
+            <span>2小时前</span>
+          </div>
+          <span>回复</span>
         </div>
-        <div class="more">更多跟帖</div>
+        <div class="text">文章说得很有道理</div>
+      </div>
+      <div class="more">更多跟帖</div>
     </div>
     <commentFooter></commentFooter>
-</div>
+  </div>
 </template>
 
 <script>
-import { articleDetail } from '@/api/news'
+import { articleDetail } from "@/api/news";
 export default {
-  data(){
+  data() {
     return {
-      article: {}
-    }
+      article: {},
+    };
   },
   created() {
-    console.log('文章ID', this.$route.query.id);
-    let id = this.$route.query.id
-    if(id) {
-      articleDetail(id).then(res => {
-        this.article = res.data.data
-      })
+    console.log("文章ID", this.$route.query.id);
+    let id = this.$route.query.id;
+    if (id) {
+      articleDetail(id).then((res) => {
+        this.article = res.data.data;
+      });
     }
-  }
-}
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -146,18 +108,24 @@ export default {
     color: #999;
     font-size: 13px;
   }
- /deep/ .content {
+  /deep/ .content {
     text-indent: 2em;
     line-height: 24px;
     font-size: 15px;
     padding-bottom: 30px;
     width: 100%;
-    a{
+    a {
       display: block;
       text-indent: 0;
       img {
         width: 100%;
       }
+    }
+  }
+  .videoContent {
+    text-indent: 0;
+    video{
+      width: 100%;
     }
   }
 }
