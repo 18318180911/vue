@@ -64,6 +64,10 @@ Vue.directive("formatDate", {
     el.innerText = time
   }
 })
+
+// 注册自己封装的组件
+import commentFooter from '@/components/commentFooter'
+Vue.component("commentFooter", commentFooter)
 new Vue({
   // 7.路由对象注入到vue实例中
   router,

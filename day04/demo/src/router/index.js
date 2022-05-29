@@ -35,6 +35,11 @@ const routes = [
         path: "/index",
         // 按需引入:  表示当用户之间访问到login.vue
         component: ()=>import("../views/index.vue")
+    },
+    {
+        path: "/articleDetail",
+        // 按需引入:  表示当用户之间访问到login.vue
+        component: ()=>import("../views/articleDetail.vue")
     }
 ]
 // 4.配置路由对象

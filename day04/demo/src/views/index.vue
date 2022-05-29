@@ -35,6 +35,7 @@
               v-for="item in newsList"
               :key="item.id"
               :post="item"
+              @click.native="toDetail(item.id)"
             ></newsItem>
           </van-list>
         </van-pull-refresh>
@@ -119,6 +120,12 @@ export default {
       // title：指的是栏目对应的标题
       // 实现更新数据
       this.onRefresh()
+    },
+    toDetail(id) {
+      this.$router.push({
+        path: "/articleDetail",
+        query: {id}
+      })
     }
   },
 };
