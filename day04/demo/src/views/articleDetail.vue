@@ -8,13 +8,13 @@
         </div>
         <span>关注</span>
     </div>
-    <div class="detail">
-        <div class="title">标题</div>
+    <div class="detail" v-if="article.id">
+        <div class="title">{{article.title}}</div>
         <div class="desc">
-            <span>火星人</span> &nbsp;&nbsp;
-            <span>2019-9-9</span>
+            <span>{{article.user.nickname}}</span> &nbsp;&nbsp;
+            <span v-formatDate="article.create_date"></span>
         </div>
-        <div class="content">
+        <div class="content" v-html="article.content">
             文章的内容：
             <ul>
               <li>0001</li>
@@ -81,8 +81,22 @@
 </template>
 
 <script>
+import { articleDetail } from '@/api/news'
 export default {
-
+  data(){
+    return {
+      article: {}
+    }
+  },
+  created() {
+    console.log('文章ID', this.$route.query.id);
+    let id = this.$route.query.id
+    if(id) {
+      articleDetail(id).then(res => {
+        this.article = res.data.data
+      })
+    }
+  }
 }
 </script>
 
@@ -132,12 +146,19 @@ export default {
     color: #999;
     font-size: 13px;
   }
-  .content {
+ /deep/ .content {
     text-indent: 2em;
     line-height: 24px;
     font-size: 15px;
     padding-bottom: 30px;
     width: 100%;
+    a{
+      display: block;
+      text-indent: 0;
+      img {
+        width: 100%;
+      }
+    }
   }
 }
 .opt {
