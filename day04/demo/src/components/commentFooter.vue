@@ -2,7 +2,7 @@
   <div class="comment">
     <div class="addcomment" v-show='!isFocus'>
         <input type="text" placeholder="写跟帖" @focus="handlerFocus" />
-        <span class="comment">
+        <span class="comment" @click="$router.push({path: '/commentList', query:{id: $route.query.id}})">
             <i class="iconfont iconpinglun-"></i>
             <!-- 评论数量 -->
             <em>{{article.comment_length}}</em> 

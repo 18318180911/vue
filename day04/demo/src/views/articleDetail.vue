@@ -46,8 +46,9 @@
         </div>
         <div class="text">文章说得很有道理</div>
       </div>
-      <div class="more">更多跟帖</div>
+      <div class="more" @click="$router.push({path: '/commentList', query:{id:$route.query.id}})">更多跟帖</div>
     </div>
+    <!-- 底部 -->
     <commentFooter></commentFooter>
   </div>
 </template>
