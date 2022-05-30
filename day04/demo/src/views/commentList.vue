@@ -68,7 +68,3 @@ export default {};
     }
 }
 </style>
-
-A王者峡谷-百星野王(Cat)
-
-我是好人
