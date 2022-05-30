@@ -28,9 +28,10 @@ export default {
   data() {
     return {
       comment: [],
-      components: { commentItem },
+      
     };
   },
+  components: { commentItem },
   created() {
     post_comment(this.$route.query.id).then((res) => {
       this.comment = res.data.data;

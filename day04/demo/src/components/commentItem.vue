@@ -8,6 +8,9 @@
       </div>
       <span>回复</span>
     </div>
+    <!-- 第二层嵌套start -->
+    <commentItem v-if="item.parent" :item="item.parent"></commentItem>
+    <!-- 第三层嵌套end -->
     <div class="bottom">{{ item.content }}</div>
   </div>
 </template>
@@ -16,10 +19,13 @@
 export default {
     props: {
         item: {
+            // 规定传入的item的数据类型
             type: Object,
             require: true
         }
-    }
+    },
+    // name属性相当于通过components注册了该组件，name的值就是注册的组件名
+    name: 'commentItem'
 };
 </script>
 
