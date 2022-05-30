@@ -76,10 +76,8 @@ export default {
                 // 向query对象添加parent_id属性
                 query.parent_id = this.parent_id
             }
-            sendComment(this.article.id, {
-                content: this.content
-            }).then(res => {
-                console.log(73, res);
+            sendComment(this.article.id, query).then(res => {
+                // console.log(73, res);
                 if(res.data.message == "评论发布成功") {
                     // 更新浏览器中的评论列表
                     this.$emit('updateEvent')
@@ -87,7 +85,7 @@ export default {
                     this.content = ''
                     // 隐藏文本域
                     this.isFocus = false
-                    this.parent_id = ''
+                    this.parent_id = null
                 } else {
                     this.$toast.fail(res.data.message)
                 }
