@@ -34,3 +34,9 @@ export function post_star(id) {
         url: '/post_star/'+id
     })
 }
+// 评论列表
+export function post_comment(id) {
+    return request({
+        url: '/post_comment/'+id
+    })
+}

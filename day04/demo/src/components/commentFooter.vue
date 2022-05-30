@@ -1,14 +1,15 @@
 <template>
-  <div class="comment">
+<div class="comment">
     <div class="addcomment" v-show='!isFocus'>
         <input type="text" placeholder="写跟帖" @focus="handlerFocus" />
-        <span class="comment" @click="$router.push({path: '/commentList', query:{id: $route.query.id}})">
+        <span class="comment" @click="$router.push({path: '/commentList',query:{ id: $route.query.id } })" >
             <i class="iconfont iconpinglun-"></i>
             <!-- 评论数量 -->
-            <em>{{article.comment_length}}</em> 
+            <em>{{ article.comment_length }}</em> 
         </span>
         <!-- 收藏 -->
-        <i class="iconfont iconshoucang" :style="{ color: article.has_star ? 'red' : 'black'}" @click="starFn"></i>
+        <i class="iconfont iconshoucang" :style="{ color: article.has_star?'red':'black' }"
+        @click="starFn"></i>
         <i class="iconfont iconfenxiang"></i>
     </div>
     <div class="inputcomment" v-show='isFocus'>
@@ -22,34 +23,36 @@
 </template>
 
 <script>
-import {articleDetail, post_star} from "@/api/news"
+import { articleDetail, post_star } from "@/api/news"
 export default {
-    data() {
+    data(){
         return {
             isFocus: false,
             article: {}
         }
     },
-    methods: {
-        handlerFocus(){},
-        // 收藏
-        starFn() { 
-          post_star(this.article.id).then(res=>{
-            if(res.data.message == '取消成功' || res.data.message == "收藏成功") {
-              this.article.has_star = !this.article.has_star
-              this.$toast.success(res.data.message)
-            } else {
-              this.$toast.fail(res.data.message)
-            }
-          })
-        }
+    created(){
+        // 获取文章详情数据
+        let id = this.$route.query.id
+        articleDetail(id).then(res=>{
+            this.article = res.data.data;
+        })
     },
-    created() {
-      // 获取文章详情数据
-      let id = this.$route.query.id
-      articleDetail(id).then(res=> {
-        this.article = res.data.data;
-      })
+    methods: {
+        // 收藏
+        starFn(){
+            post_star(this.article.id).then(res=>{
+                // console.log(44, res);
+                if(res.data.message == "收藏成功"|| res.data.message == "取消成功"){
+                    // 更新浏览器上显示效果
+                    this.article.has_star = !this.article.has_star
+                    this.$toast.success(res.data.message)
+                }else{
+                    this.$toast.fail(res.data.message)
+                }
+            })
+        },
+        handlerFocus(){},
     }
 }
 </script>

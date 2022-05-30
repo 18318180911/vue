@@ -3,16 +3,16 @@
     <!-- 头部 -->
     <van-nav-bar title="精彩评论" left-arrow @click-left="$router.back()" />
     <!-- 评论列表 -->
-    <div class="item">
+    <div class="item" v-for="item in comment" :key="item.id">
         <div class="head">
-            <img src="../assets/01.jpg" alt />
+            <img :src="item.user.head_img | joinPath" alt />
             <div>
-                <p>发表人</p>
-                <span>时间</span>
+                <p>{{item.user.nickname}}</p>
+                <span v-formatDate="item.create_date"></span>
             </div>
             <span>回复</span>
         </div>
-        <div class="text">评论内容</div>
+        <div class="text">{{item.content}}</div>
     </div>
     <!-- 底部评论块 -->
     <commentFooter></commentFooter>
@@ -21,7 +21,19 @@
 
 
 <script>
-export default {};
+import {post_comment} from '@/api/news'
+export default {
+    data() {
+        return {
+            comment: []
+        }
+    },
+    created() {
+        post_comment(this.$route.query.id).then(res => {
+            this.comment = res.data.data
+        })
+    }
+};
 </script>
 
 
