@@ -52,7 +52,15 @@ export default {
                 }
             })
         },
-        handlerFocus(){},
+        handlerFocus(){
+            // 控制文本域的显示
+            this.isFocus = true
+            // 文本域自动聚焦 focus
+            // 因为DOM更新是异步的，无法聚焦，可以使用this.$nextTick解决
+            this.$nextTick(() => {
+                this.$refs.commtext.focus()
+            })
+        },
     }
 }
 </script>
