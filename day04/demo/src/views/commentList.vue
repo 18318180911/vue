@@ -10,13 +10,13 @@
           <p>{{ item.user.nickname }}</p>
           <span v-formatDate="item.create_date"></span>
         </div>
-        <span>回复</span>
+        <span @click="replyFn(item.id)">回复</span>
       </div>
       <commentItem v-if="item.parent" :item="item.parent"></commentItem>
       <div class="text">{{ item.content }}</div>
     </div>
     <!-- 底部评论块 -->
-    <commentFooter @updateEvent="updateFn"></commentFooter>
+    <commentFooter ref="footer" @updateEvent="updateFn"></commentFooter>
   </div>
 </template>
 
@@ -40,6 +40,13 @@ export default {
         this.comment = res.data.data;
       });
     },
+    replyFn(id) {
+        // 直接调用子组件的handlerFocus方法实现
+        // 控制底部文本域的显示
+        this.$refs.footer.handlerFocus()
+        // 把id传递给子组件
+        this.$refs.footer.parent_id = id
+    }
   },
 };
 </script>

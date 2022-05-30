@@ -29,7 +29,8 @@ export default {
         return {
             isFocus: false,
             article: {},
-            content: ''
+            content: '',
+            parent_id: null
         }
     },
     created(){
@@ -66,6 +67,14 @@ export default {
         sendFn() {
             if(!this.content) {
                 return this.$toast.fail('评论内容不能为空')
+            }
+            // 动态添加parent_id参数
+            let query = {
+                content: this.content
+            }
+            if(this.parent_id) {
+                // 向query对象添加parent_id属性
+                query.parent_id = this.parent_id
             }
             sendComment(this.article.id, {
                 content: this.content
