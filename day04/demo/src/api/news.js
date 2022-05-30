@@ -40,3 +40,11 @@ export function post_comment(id) {
         url: '/post_comment/'+id
     })
 }
+// 发表评论
+export function sendComment(id, data) {
+    return request({
+        url: 'post_comment' + id,
+        method: 'post',
+        data
+    })
+}

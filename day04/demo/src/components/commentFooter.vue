@@ -13,9 +13,9 @@
         <i class="iconfont iconfenxiang"></i>
     </div>
     <div class="inputcomment" v-show='isFocus'>
-        <textarea  ref='commtext' rows="5" @blur='isFocus = false'></textarea>
+        <textarea v-model="content" ref='commtext' rows="5" @blur='isFocus = false'></textarea>
         <div>
-            <span>发 送</span>
+            <span @click="sendFn">发 送</span>
             <span>取 消</span>
         </div>
     </div>
@@ -23,12 +23,13 @@
 </template>
 
 <script>
-import { articleDetail, post_star } from "@/api/news"
+import { articleDetail, post_star, sendComment } from "@/api/news"
 export default {
     data(){
         return {
             isFocus: false,
-            article: {}
+            article: {},
+            content: ''
         }
     },
     created(){
@@ -59,6 +60,26 @@ export default {
             // 因为DOM更新是异步的，无法聚焦，可以使用this.$nextTick解决
             this.$nextTick(() => {
                 this.$refs.commtext.focus()
+            })
+        },
+        // 发表评论
+        sendFn() {
+            if(!this.content) {
+                return this.$toast.fail('评论内容不能为空')
+            }
+            sendComment(thid.article.id, {
+                content: this.content
+            }).then(res => {
+                console.log(49, res);
+                if(res.data.message == '评论发布成功') {
+                    // 更新浏览器中的评论列表
+                    // 清空评论内容
+                    this.content = ''
+                    // 隐藏文本域
+                    this.isFocus = false
+                } else {
+                    this.$toast.fail(res.data.message = '评论发布失败')
+                }
             })
         },
     }
