@@ -4,7 +4,8 @@
         <input type="text" placeholder="写跟帖" @focus="handlerFocus" />
         <span class="comment">
             <i class="iconfont iconpinglun-"></i>
-            <em>100</em> 
+            <!-- 评论数量 -->
+            <em>{{article.comment_length}}</em> 
         </span>
         <!-- 收藏 -->
         <i class="iconfont iconshoucang" :style="{ color: article.has_star ? 'red' : 'black'}" @click="starFn"></i>
@@ -34,7 +35,7 @@ export default {
         // 收藏
         starFn() { 
           post_star(this.article.id).then(res=>{
-            if(res.data.message == '收藏成功' || res.data.message == "取消收藏") {
+            if(res.data.message == '取消成功' || res.data.message == "收藏成功") {
               this.article.has_star = !this.article.has_star
               this.$toast.success(res.data.message)
             } else {
