@@ -6,7 +6,8 @@
             <i class="iconfont iconpinglun-"></i>
             <em>100</em> 
         </span>
-        <i class="iconfont iconshoucang"></i>
+        <!-- 收藏 -->
+        <i class="iconfont iconshoucang" :style="{ color: article.has_star ? 'red' : 'black'}"></i>
         <i class="iconfont iconfenxiang"></i>
     </div>
     <div class="inputcomment" v-show='isFocus'>
@@ -20,14 +21,23 @@
 </template>
 
 <script>
+import {articleDetail} from "@/api/news"
 export default {
     data() {
         return {
-            isFocus: false
+            isFocus: false,
+            article: {}
         }
     },
     methods: {
         handlerFocus(){}
+    },
+    created() {
+      // 获取文章详情数据
+      let id = this.$route.query.id
+      articleDetail(id).then(res=> {
+        this.article = res.data.data;
+      })
     }
 }
 </script>
