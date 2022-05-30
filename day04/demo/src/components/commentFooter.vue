@@ -87,6 +87,7 @@ export default {
                     this.content = ''
                     // 隐藏文本域
                     this.isFocus = false
+                    this.parent_id = ''
                 } else {
                     this.$toast.fail(res.data.message)
                 }
