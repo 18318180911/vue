@@ -13,7 +13,7 @@
         <i class="iconfont iconfenxiang"></i>
     </div>
     <div class="inputcomment" v-show='isFocus'>
-        <textarea v-model="content" ref='commtext' rows="5" @blur='isFocus = false'></textarea>
+        <textarea v-model="content" ref='commtext' rows="5"></textarea>
         <div>
             <span @click="sendFn">发 送</span>
             <span>取 消</span>
@@ -67,18 +67,19 @@ export default {
             if(!this.content) {
                 return this.$toast.fail('评论内容不能为空')
             }
-            sendComment(thid.article.id, {
+            sendComment(this.article.id, {
                 content: this.content
             }).then(res => {
-                console.log(49, res);
-                if(res.data.message == '评论发布成功') {
+                console.log(73, res);
+                if(res.data.message == "评论发布成功") {
                     // 更新浏览器中的评论列表
+                    this.$emit('updateEvent')
                     // 清空评论内容
                     this.content = ''
                     // 隐藏文本域
                     this.isFocus = false
                 } else {
-                    this.$toast.fail(res.data.message = '评论发布失败')
+                    this.$toast.fail(res.data.message)
                 }
             })
         },

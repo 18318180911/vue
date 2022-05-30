@@ -12,30 +12,34 @@
         </div>
         <span>回复</span>
       </div>
-      <commentItem  v-if="item.parent" :item="item.parent"></commentItem>
+      <commentItem v-if="item.parent" :item="item.parent"></commentItem>
       <div class="text">{{ item.content }}</div>
     </div>
     <!-- 底部评论块 -->
-    <commentFooter></commentFooter>
+    <commentFooter @updateEvent="updateFn"></commentFooter>
   </div>
 </template>
 
 
 <script>
 import { post_comment } from "@/api/news";
-import commentItem from '@/components/commentItem.vue'
+import commentItem from "@/components/commentItem.vue";
 export default {
   data() {
     return {
       comment: [],
-      
     };
   },
   components: { commentItem },
   created() {
-    post_comment(this.$route.query.id).then((res) => {
-      this.comment = res.data.data;
-    });
+    this.updateFn();
+  },
+  methods: {
+    updateFn() {
+      post_comment(this.$route.query.id).then((res) => {
+        this.comment = res.data.data;
+      });
+    },
   },
 };
 </script>
