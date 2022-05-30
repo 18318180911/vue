@@ -7,7 +7,7 @@
             <em>100</em> 
         </span>
         <!-- 收藏 -->
-        <i class="iconfont iconshoucang" :style="{ color: article.has_star ? 'red' : 'black'}"></i>
+        <i class="iconfont iconshoucang" :style="{ color: article.has_star ? 'red' : 'black'}" @click="starFn"></i>
         <i class="iconfont iconfenxiang"></i>
     </div>
     <div class="inputcomment" v-show='isFocus'>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import {articleDetail} from "@/api/news"
+import {articleDetail, post_star} from "@/api/news"
 export default {
     data() {
         return {
@@ -30,7 +30,18 @@ export default {
         }
     },
     methods: {
-        handlerFocus(){}
+        handlerFocus(){},
+        // 收藏
+        starFn() { 
+          post_star(this.article.id).then(res=>{
+            if(res.data.message == '收藏成功' || res.data.message == "取消收藏") {
+              this.article.has_star = !this.article.has_star
+              this.$toast.success(res.data.message)
+            } else {
+              this.$toast.fail(res.data.message)
+            }
+          })
+        }
     },
     created() {
       // 获取文章详情数据

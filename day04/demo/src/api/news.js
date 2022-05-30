@@ -28,3 +28,9 @@ export function post_like(id) {
         url: '/post_like/' + id
     })
 }
+// 收藏文章
+export function post_star(id) {
+    return request({
+        url: '/post_star/'+id
+    })
+}
