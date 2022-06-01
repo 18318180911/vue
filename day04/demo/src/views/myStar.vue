@@ -7,7 +7,7 @@
     <van-swipe-cell v-for="item in star" :key="item.id">
         <newsItem :post="item"></newsItem>
         <template #right>
-            <van-button square text="删除" type="danger" class="delete-button" />
+            <van-button square text="删除" type="danger" class="delete-button" @click="delFn(item.id)" />
         </template>
     </van-swipe-cell>
     </div>
@@ -16,6 +16,7 @@
 <script>
 import { starList} from '@/api/user'
 import newsItem from '@/components/newsItem.vue'
+import {post_star}  from '@/api/news'
 export default {
     data() {
         return {
@@ -23,12 +24,27 @@ export default {
         }
     },
     created() {
-        starList().then(res => {
+        this.getStarList()
+    },
+    components: {newsItem},
+    methods: {
+        getStarList() {
+            starList().then(res => {
             console.log(15,res)
             this.star = res.data.data
         })
-    },
-    components: {newsItem},
+        },
+        delFn(id) {
+            post_star(id).then(res => {
+                if(res.data.message == '取消成功'){
+                    this.getStarList()
+                    this.$toast.success(res.data.message)
+                } else {
+                    this.$toast.fail(res.data.message)
+                }
+            })
+        }
+    }
 }
 </script>
 
