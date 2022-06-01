@@ -67,3 +67,9 @@ export function followsList(){
         url: '/user_follows'
     })
 }
+// 收藏的文章列表
+export  function starList() {
+    return request({
+        url: '/user_star'
+    })
+}

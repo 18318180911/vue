@@ -41,7 +41,7 @@
       </div>
       <p class="info">
         <span>{{post.user.nickname}}</span>
-        <span>{{post.comment_length}}</span>
+        <span>{{post.comment_length >= 0 ? post.comment_length:post.comment_length}}</span>
       </p>
     </div>
   </div>
