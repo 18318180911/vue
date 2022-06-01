@@ -6,13 +6,13 @@
     <div class="content">
         <h1>点击删除频道</h1>
         <van-grid :gutter="10">
-            <van-grid-item v-for="value in 8" :key="value" text="文字" />
+            <van-grid-item v-for="value in categoryList" :key="value.id" :text="value.name" />
         </van-grid>
     </div>
     <div class="content">
         <h1>点击添加频道</h1>
         <van-grid :gutter="10">
-            <van-grid-item v-for="value in 8" :key="value" text="文字" />
+            <van-grid-item v-for="value in delCategoryList" :key="value.id" :text="value.name" />
         </van-grid>
     </div>
     </div>
@@ -20,9 +20,20 @@
 
 
 <script>
+import {category} from '@/api/news'
 export default {
-
-
+    data() {
+        return {
+            categoryList: [],
+            delCategoryList: []
+        }
+    },
+    created(){
+        category().then(res => {
+            this.categoryList = res.data.data
+            this.categoryList.splice(1, 2)
+        })
+    }
 }
 </script>
 
