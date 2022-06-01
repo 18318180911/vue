@@ -5,7 +5,7 @@
     </van-nav-bar>
     <!-- 列表 -->
     <van-swipe-cell v-for="item in star" :key="item.id">
-        <newsItem :post="item"></newsItem>
+        <newsItem :post="item" @click.native="toDetail(item.id)"></newsItem>
         <template #right>
             <van-button square text="删除" type="danger" class="delete-button" @click="delFn(item.id)" />
         </template>
@@ -41,6 +41,15 @@ export default {
                     this.$toast.success(res.data.message)
                 } else {
                     this.$toast.fail(res.data.message)
+                }
+            })
+        },
+        // 跳转到文章详情
+        toDetail(id){
+            this.$router.push({
+                path: '/articleDetail',
+                query: {
+                    id
                 }
             })
         }
