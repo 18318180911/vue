@@ -43,6 +43,8 @@
             ></newsItem>
           </van-list>
         </van-pull-refresh>
+        <!-- 栏目列表右边加号 -->
+        <van-icon name="plus" @click="$touter.push('/category')"></van-icon>
       </van-tab>
     </van-tabs>
   </div>
@@ -168,5 +170,20 @@ export default {
   .van-icon {
     color: #fff;
   }
+}
+/deep/.van-tabs{
+    position: relative;
+    .van-tabs__wrap{
+        padding-right: 44px;
+    }
+    .van-icon{
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 44px;
+        margin-right: 10px;
+    }
 }
 </style>
