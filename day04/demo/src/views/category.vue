@@ -12,7 +12,7 @@
     <div class="content">
         <h1>点击添加频道</h1>
         <van-grid :gutter="10">
-            <van-grid-item v-for="value in delCategoryList" :key="value.id" :text="value.name" />
+            <van-grid-item v-for="value in delCategoryList" :key="value.id" :text="value.name" @click="addFn(value.id)" />
         </van-grid>
     </div>
     </div>
@@ -45,6 +45,13 @@ export default {
             this.categoryList = this.categoryList.filter(item => {
                 return item.id != id
             })
+        },
+        addFn(id){
+            let index = this.delCategoryList.findIndex(item => {
+                return item.id == id
+            })
+            let res = this.delCategoryList.splice(index, 1)
+            this.categoryList.push(...res)
         }
     }
 }
