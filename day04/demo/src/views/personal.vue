@@ -46,6 +46,8 @@ export default {
       // 清除缓存数据
       localStorage.removeItem("75-token");
       localStorage.removeItem("75-userId");
+      // 退出网站，清空这个网站所有缓存
+      localStorage.clear()
       // 当跳转页面时，无需传参数就使用该语法
       this.$router.push('/login')
     }

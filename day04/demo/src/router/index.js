@@ -78,7 +78,7 @@ router.beforeEach((to, from, next) => {
     }
 })
 
-let writeArr = ['/personal', '/edit_profile']
+let writeArr = ['/personal', '/edit_profile', '/category']
 router.beforeEach((to, from, next) => {
     let token = localStorage.getItem('75-token')
     if(writeArr.indexOf(to.path) != -1 && !token){
