@@ -14,7 +14,7 @@
       </template>
       <!--right  -->
       <template #right>
-        <van-icon name="manager-o" size="20" />
+        <van-icon name="manager-o" size="20" @click="$router.push('/personal')"/>
       </template>
     </van-nav-bar>
     <!-- 内容 -->

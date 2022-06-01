@@ -45,6 +45,11 @@ const routes = [
         path: "/commentList",
         // 按需引入:  表示当用户之间访问到login.vue
         component: ()=>import("../views/commentList.vue")
+    },
+    {
+        path: "/myFollow",
+        // 按需引入:  表示当用户之间访问到myFollow.vue
+        component: ()=>import("../views/myFollow.vue")
     }
 ]
 // 4.配置路由对象
