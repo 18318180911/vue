@@ -44,7 +44,7 @@
           </van-list>
         </van-pull-refresh>
         <!-- 栏目列表右边加号 -->
-        <van-icon name="plus" @click="$touter.push('/category')"></van-icon>
+        <van-icon name="plus" @click="$router.push('/category')"/>
       </van-tab>
     </van-tabs>
   </div>
