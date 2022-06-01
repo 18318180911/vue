@@ -24,15 +24,18 @@ import {category} from '@/api/news'
 export default {
     data() {
         return {
-            categoryList: [],
-            delCategoryList: []
+            categoryList: JSON.parse(localStorage.getItem('categoryList')) || [],
+            delCategoryList: JSON.parse(localStorage.getItem('delCategoryList')) || []
         }
     },
     created(){
-        category().then(res => {
+        if(this.categoryList.length === 0 && this.delCategoryList.length === 0) {
+            category().then(res => {
             this.categoryList = res.data.data
-            this.categoryList.splice(1, 2)
+            let arr = this.categoryList.splice(1, 2)
+            localStorage.setItem('defaultCategory', JSON.stringify(arr))
         })
+        }
     },
     methods:{
         delFn(id) {
@@ -52,6 +55,15 @@ export default {
             })
             let res = this.delCategoryList.splice(index, 1)
             this.categoryList.push(...res)
+        }
+    },
+    watch: {
+        categoryList:{
+            deep: true,
+            handler() {
+                localStorage.setItem('categoryList', JSON.stringify(this.categoryList))
+                localStorage.setItem('delCategoryList', JSON.stringify(this.delCategoryList))
+            }
         }
     }
 }
