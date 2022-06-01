@@ -55,6 +55,11 @@ const routes = [
         path: "/myStar",
         // 按需引入:  表示当用户之间访问到myStar.vue
         component: ()=>import("../views/myStar.vue")
+    },
+    {
+        path: "/category",
+        // 按需引入:  表示当用户之间访问到myStar.vue
+        component: ()=>import("../views/category.vue")
     }
 ]
 // 4.配置路由对象
