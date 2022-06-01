@@ -50,6 +50,11 @@ const routes = [
         path: "/myFollow",
         // 按需引入:  表示当用户之间访问到myFollow.vue
         component: ()=>import("../views/myFollow.vue")
+    },
+    {
+        path: "/myStar",
+        // 按需引入:  表示当用户之间访问到myStar.vue
+        component: ()=>import("../views/myStar.vue")
     }
 ]
 // 4.配置路由对象

@@ -18,7 +18,7 @@
     <div class="content">
         <van-cell title="我的关注" is-link value="关注的用户" @click="$router.push('/myFollow')"/>
         <van-cell title="我的跟帖" is-link value="跟帖/回复" />
-        <van-cell title="我的收藏" is-link value="文章/视频" />
+        <van-cell title="我的收藏" is-link value="文章/视频" @click="$router.push('/myStar')"/>
         <van-cell title="设置" is-link />
     </div>
     <van-button color="#eb6112" block round @click="logoutFn">退出</van-button>

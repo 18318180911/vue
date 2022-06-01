@@ -8,30 +8,45 @@
       <div class="box">
         <img :src="item.head_img | joinPath" alt="" />
         <div class="center">
-          <p>{{item.nickname}}</p>
-          <span c-formaDate="item.create_date"></span>
+          <p>{{ item.nickname }}</p>
+          <span v-formatDate="item.create_date"></span>
         </div>
-        <span>取消关注</span>
+        <span @click="cancel(item.id)">取消关注</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { followsList } from '@/api/user'
+import { followsList, user_unfollow } from "@/api/user";
 export default {
-    data() {
-        return {
-            // 保存
-            follows: []
-        }
+  data() {
+    return {
+      // 保存
+      follows: [],
+    };
+  },
+  created() {
+    this.getFollows();
+  },
+  methods: {
+    getFollows() {
+      followsList().then((res) => {
+        this.follows = res.data.data;
+      });
     },
-    created() {
-        followsList().then(res=> {
-            console.log(30, res);
-            this.follows = res.data.data
-        })
-    }
+    cancel(id) {
+      user_unfollow(id).then((res) => {
+        if (res.data.message == "取消关注成功") {
+          this.getFollows();
+          // 提示成功
+          this.$toast.success(res.data.message)
+        } else {
+          this.$toast.fail(res.data.message);
+        }
+      });
+    },
+  },
 };
 </script>
 
