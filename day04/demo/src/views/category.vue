@@ -6,7 +6,7 @@
     <div class="content">
         <h1>点击删除频道</h1>
         <van-grid :gutter="10">
-            <van-grid-item v-for="value in categoryList" :key="value.id" :text="value.name" />
+            <van-grid-item v-for="value in categoryList" :key="value.id" :text="value.name" @click="delFn(value.id)" />
         </van-grid>
     </div>
     <div class="content">
@@ -33,6 +33,19 @@ export default {
             this.categoryList = res.data.data
             this.categoryList.splice(1, 2)
         })
+    },
+    methods:{
+        delFn(id) {
+            // 把被删除的添加delCategoryList数组中
+            let res = this.categoryList.filter(item => {
+                return item.id === id
+            })
+            this.delCategoryList.push(...res)
+            // 把不需要删除的过滤出来
+            this.categoryList = this.categoryList.filter(item => {
+                return item.id != id
+            })
+        }
     }
 }
 </script>
