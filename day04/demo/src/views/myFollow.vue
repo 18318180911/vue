@@ -4,12 +4,12 @@
     <van-nav-bar title="我的关注" left-arrow @click-left="$router.back()">
     </van-nav-bar>
     <!-- 列表 -->
-    <div class="list">
+    <div class="list" v-for="item in follows" :key="item.id">
       <div class="box">
-        <img src="../assets/01.jpg" alt="" />
+        <img :src="item.head_img | joinPath" alt="" />
         <div class="center">
-          <p>什么老板</p>
-          <span>2019-9-9</span>
+          <p>{{item.nickname}}</p>
+          <span c-formaDate="item.create_date"></span>
         </div>
         <span>取消关注</span>
       </div>
@@ -18,7 +18,21 @@
 </template>
 
 <script>
-export default {};
+import { followsList } from '@/api/user'
+export default {
+    data() {
+        return {
+            // 保存
+            follows: []
+        }
+    },
+    created() {
+        followsList().then(res=> {
+            console.log(30, res);
+            this.follows = res.data.data
+        })
+    }
+};
 </script>
 
 <style lang="less" scoped>

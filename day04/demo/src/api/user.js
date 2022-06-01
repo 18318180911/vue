@@ -61,3 +61,9 @@ export function user_unfollow(id) {
         url: '/user_unfollow/' + id,
     })
 }
+// 关注列表
+export function followsList(){
+    return request({
+        url: '/user_follows'
+    })
+}
