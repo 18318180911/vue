@@ -14,7 +14,11 @@
       </template>
       <!--right  -->
       <template #right>
-        <van-icon name="manager-o" size="20" @click="$router.push('/personal')"/>
+        <van-icon
+          name="manager-o"
+          size="20"
+          @click="$router.push('/personal')"
+        />
       </template>
     </van-nav-bar>
     <!-- 内容 -->
@@ -68,10 +72,18 @@ export default {
   },
 
   created() {
-    category().then((res) => {
-      this.categoryList = res.data.data;
+    let categorys = JSON.parse(localStorage.getItem("categoryList")) || [];
+    let defaultCategory =
+      JSON.parse(localStorage.getItem("defaultCategory")) || [];
+    if (defaultCategory.length > 0) {
+      this.categoryList = [...defaultCategory, ...categorys];
       this.getNews();
-    });
+    } else {
+      category().then((res) => {
+        this.categoryList = res.data.data;
+        this.getNews();
+      });
+    }
   },
   methods: {
     // 获取文章列表数据，封装在getNews函数中调用接口，是为了能够复用这个里面的代码。
@@ -119,14 +131,14 @@ export default {
       // name：指的是栏目对应的下标值
       // title：指的是栏目对应的标题
       // 实现更新数据
-      this.onRefresh()
+      this.onRefresh();
     },
     toDetail(id) {
       this.$router.push({
         path: "/articleDetail",
-        query: {id}
-      })
-    }
+        query: { id },
+      });
+    },
   },
 };
 </script>
