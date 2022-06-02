@@ -16,7 +16,7 @@
     <div class="content">
       <h1>历史记录</h1>
       <ul class="content-list">
-        <li v-for="(item, index) in history" :key="index">{{ item }}</li>
+        <li v-for="(item, index) in history" :key="index" @click="historySearch(item)">{{ item }}</li>
       </ul>
     </div>
     <div class="content">
@@ -80,6 +80,10 @@ export default {
         },
       });
     },
+    historySearch(val) {
+        this.postSearch = val;
+        this.searchFn()
+    }
   },
 };
 </script>
