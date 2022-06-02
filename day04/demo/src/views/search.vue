@@ -16,15 +16,27 @@
     <div class="content">
       <h1>历史记录</h1>
       <ul class="content-list">
-        <li>001</li>
-        <li>002</li>
-        <li>003</li>
+        <li v-for="(item, index) in history" :key="index">{{ item }}</li>
       </ul>
     </div>
     <div class="content">
       <h1>搜索结果</h1>
       <ul class="content-list search-box">
-        <li v-for="item in data" :key="item.id" v-html="item.title.replace(postSearch, `<span style=color:red;>${postSearch}</span>`)" @click="$router.push({path: '/articleDetail', query: {id: item.id}})">{{item.title}}</li>
+        <li
+          v-for="item in data"
+          :key="item.id"
+          v-html="
+            item.title.replace(
+              postSearch,
+              `<span style=color:red;>${postSearch}</span>`
+            )
+          "
+          @click="
+            $router.push({ path: '/articleDetail', query: { id: item.id } })
+          "
+        >
+          {{ item.title }}
+        </li>
       </ul>
     </div>
   </div>
@@ -37,11 +49,22 @@ export default {
     return {
       postSearch: "",
       data: [],
+      history: JSON.parse(localStorage.getItem("75-history")) || [],
     };
   },
   methods: {
     // 搜索
     searchFn() {
+      if (!this.postSearch) {
+        return this.$toast.fail("请输入关键词搜索!");
+      }
+      // 利用indexOf方法查找数组中是否已经存在搜索关键词，如果不存在则加入
+      if (this.history.indexOf(this.postSearch) == -1) {
+        this.history.push(this.postSearch);
+        // 数组去重
+        // this.history =  [...new Set(this.history)]
+        localStorage.setItem("75-history", JSON.stringify(this.history));
+      }
       console.log(this.postSearch);
       searchList({ keyword: this.postSearch }).then((res) => {
         console.log(44, res);
@@ -49,13 +72,13 @@ export default {
       });
     },
     // 跳转
-     toDetail(id){
+    toDetail(id) {
       this.$router.push({
         path: "/articleDetail",
         query: {
-          id
-        }
-      })
+          id,
+        },
+      });
     },
   },
 };
