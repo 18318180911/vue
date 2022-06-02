@@ -48,3 +48,10 @@ export function sendComment(id, data) {
         data
     })
 }
+// 搜索
+export function searchList(params) {
+    return request({
+        url:'/post_search',
+        params
+    })
+}
