@@ -23,7 +23,7 @@
     </van-nav-bar>
     <!-- 内容 -->
     <!-- v-model="curIndex设置栏目选中效果" -->
-    <van-tabs v-model="curIndex" @change="tabChangeFn">
+    <van-tabs v-model="curIndex" @change="tabChangeFn" @click.native="toCategory" sticky>
       <van-tab v-for="item in categoryList" :title="item.name" :key="item.id">
         <!-- 下拉 -->
         <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
@@ -141,6 +141,12 @@ export default {
         query: { id },
       });
     },
+    // 跳转到频道管理页面
+    toCategory(event) {
+      if(event.target.className.indexOf('van-tabls_wrap') != -1) {
+        this.$router.push('/category')
+      }
+    }
   },
 };
 </script>
@@ -174,12 +180,17 @@ export default {
 /deep/.van-tabs{
     position: relative;
     .van-tabs__wrap{
+      position: relative;
         padding-right: 44px;
     }
     .van-icon{
+      content: "+";
         position: absolute;
         top: 0;
         right: 0;
+        width: 44px;
+        height: 44px;
+        background: #fff;
         font-size: 20px;
         font-weight: bold;
         line-height: 44px;
