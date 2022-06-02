@@ -7,7 +7,7 @@
       </template>
       <!-- 中 -->
       <template #title>
-        <div class="search">
+        <div class="search" @click="$router.push('/search')">
           <van-icon name="search" size="18" />
           <span>搜索商品</span>
         </div>
