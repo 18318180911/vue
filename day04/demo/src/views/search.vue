@@ -24,7 +24,7 @@
     <div class="content">
       <h1>搜索结果</h1>
       <ul class="content-list search-box">
-        <li v-for="item in data" :key="item.id">{{item.title}}</li>
+        <li v-for="item in data" :key="item.id" v-html="item.title.replace(postSearch, `<span style=color:red;>${postSearch}</span>`)" @click="$router.push({path: '/articleDetail', query: {id: item.id}})">{{item.title}}</li>
       </ul>
     </div>
   </div>
@@ -40,12 +40,22 @@ export default {
     };
   },
   methods: {
+    // 搜索
     searchFn() {
       console.log(this.postSearch);
       searchList({ keyword: this.postSearch }).then((res) => {
         console.log(44, res);
         this.data = res.data.data;
       });
+    },
+    // 跳转
+     toDetail(id){
+      this.$router.push({
+        path: "/articleDetail",
+        query: {
+          id
+        }
+      })
     },
   },
 };
