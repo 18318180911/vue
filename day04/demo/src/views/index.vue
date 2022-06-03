@@ -62,7 +62,7 @@ export default {
       // 栏目列表
       categoryList: [],
       // 表示栏目下标值，1表示默认获取“头条”的下标
-      curIndex: 1,
+      curIndex: this.$route.meta.curIndex,
       // 新闻列表
       newsList: [],
       isLoading: false,
@@ -132,6 +132,7 @@ export default {
     tabChangeFn(name, title) {
       // name：指的是栏目对应的下标值
       // title：指的是栏目对应的标题
+      this.$route.meta.curIndex = this.curIndex
       // 实现更新数据
       this.onRefresh();
     },

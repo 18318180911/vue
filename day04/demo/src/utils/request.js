@@ -20,8 +20,16 @@ axios.interceptors.response.use(function (response) {
     // 未登录的情况下，后端会返回statusCode属性，当这个属性的值为401说用户信息验证失败
     // 也就是没有登录
     if(response.data.statusCode === 401) {
+        // 获取当前的url地址
+        console.log(32,location.hash);
+        console.log(33,location.href);
         // 没有登录跳转到登录页面
-        router.push('/login')
+        router.push({
+            path: '/login',
+            query: {
+                redirectUrl: location.href
+            }
+        })
     }
     return response;
 },function(error) {

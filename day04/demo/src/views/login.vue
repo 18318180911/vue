@@ -60,9 +60,15 @@ export default {
             if (res.data.message === "登录成功") {
               localStorage.setItem("75-token", res.data.data.token);
               localStorage.setItem("75-userId", res.data.data.user.id);
-              this.$router.push({
+              let query = this.$route.query
+              let url = query.redirectUrl&&query.redirectUrl.split('#')[1] ||""
+              if(url){
+                this.$router.push(url)
+              }else {
+                this.$router.push({
                 path: "/index",
               });
+              }
             } else {
               this.$toast.fail(res.data.message);
             }
