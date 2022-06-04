@@ -20,6 +20,13 @@ const store = new Vuex.Store({
     add(state,setp){
       state.count += setp
     }
+  },
+  actions: {
+    addAsync(store, num) {
+      setTimeout(() => {
+        store.commit('add', num)
+      }, 1000)
+  }
   }
 })
 new Vue({
