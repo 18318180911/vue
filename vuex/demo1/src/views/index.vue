@@ -1,7 +1,6 @@
 <template>
   <div>
-    <!-- 设置一级挂载点 -->
-    <router-view></router-view>
+      首页
   </div>
 </template>
 
