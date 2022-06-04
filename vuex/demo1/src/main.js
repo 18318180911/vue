@@ -13,7 +13,14 @@ Vue.use(Vuex)
 // 实例化
 const store = new Vuex.Store({
   // state中存放的就是全局共享的数据
-  state: {count: 0}
+  state: {
+    count: 0
+  },
+  mutations: {
+    add(state,setp){
+      state.count += setp
+    }
+  }
 })
 new Vue({
   router,

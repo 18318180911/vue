@@ -3,6 +3,7 @@
     <h1>渲染vuex中的count的数量为: {{$store.state.count}}</h1>
     <h1>渲染vuex中的count的数量为: {{count}}</h1>
     <h1>渲染vuex中的count的数量为: {{count}}</h1>
+    <button @click="$store.commit('add', 5)">增加: {{count}}</button>
   </div>
 </template>
 
