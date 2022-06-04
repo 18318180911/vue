@@ -13,6 +13,17 @@ const routes = [
         name: 'index',
         component: ()=>import('@/views/index.vue')
       },
+      // {
+      //   path: '/pins',
+      //   name: 'pins',
+      //   component: ()=>import('@/views/pins.vue')
+      // }
+    ]
+  },
+  {
+    path: '/',
+    component: layout,
+    children: [
       {
         path: '/pins',
         name: 'pins',
