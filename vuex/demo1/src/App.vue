@@ -11,14 +11,18 @@
     <button @click="$store.dispatch('ansncChangeToken')">修改token</button> -->
     <button @click="$store.commit('user/updateToken')">修改token</button>
     <button @click="$store.dispatch('user/ansncChangeToken')">修改token</button>
+    <button @click="updateToken">通过辅助函数修改token</button>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 export default {
   computed: {
-    ...mapGetters(['token', 'name'])
+    ...mapGetters(['token', 'name']),
+  },
+  methods: {
+    ...mapMutations("user", ['updateToken'])
   }
 };
 </script>
