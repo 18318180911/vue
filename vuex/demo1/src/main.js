@@ -32,6 +32,35 @@ const store = new Vuex.Store({
   getters: {
     filterList: (state) => {
       return state.list.filter(item => item > 5)
+    },
+    token: state=>state.user.token,
+    name: state=>state.setting.name
+  },
+  modules: {
+    user: {
+      namespaced: true,
+      state: {
+        token: '12345'
+      },
+      mutations:{
+        updateToken(state){
+          state.token = 666
+        }
+      },
+      actions:{
+        ansncChangeToken(store) {
+          setTimeout(() => {
+            store.commit('updateToken')
+          }, 1000)
+        }
+      },
+      getters:{},
+      modules:{}
+    },
+    setting:{
+      state: {
+        name: '大聪明'
+      }
     }
   }
 })
