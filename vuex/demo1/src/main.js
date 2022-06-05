@@ -14,7 +14,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   // state中存放的就是全局共享的数据
   state: {
-    count: 0
+    count: 0,
+    list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   },
   mutations: {
     add(state,setp){
@@ -27,6 +28,11 @@ const store = new Vuex.Store({
         store.commit('add', num)
       }, 1000)
   }
+  },
+  getters: {
+    filterList: (state) => {
+      return state.list.filter(item => item > 5)
+    }
   }
 })
 new Vue({
